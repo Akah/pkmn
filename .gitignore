@@ -1,0 +1,11 @@
+# ingore:
+
+# emacs unsaved files
+*~
+*#
+
+# binary file
+pkmn
+
+# html generated from readme
+README.html
