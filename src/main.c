@@ -11,8 +11,25 @@ void load_media();
 TTF_Font* load_font(char* src, int size);
 
 int quit = 0;
-int map_width;
-int map_height;
+
+int camera_offset_x = 0;
+int camera_offset_y = 0;
+
+int player_pos_x = 9*32;
+int player_pos_y = 7*32;
+
+int map[8][8] =
+    {
+     {1,1,1,1,1,1,1,1}, 
+     {1,0,0,0,0,0,0,1},
+     {1,0,0,0,0,0,0,1},
+     {1,0,0,0,0,0,0,1},
+     {1,0,0,0,0,0,0,1},
+     {1,0,0,0,0,0,0,1},
+     {1,0,0,0,0,0,0,1},
+     {1,1,1,1,1,1,1,1},
+    };
+
 
 int main(int argc, char* args[])
 {
@@ -22,16 +39,6 @@ int main(int argc, char* args[])
     pWindow = createWindow();
     pRenderer = SDL_CreateRenderer(pWindow, -1, SDL_RENDERER_ACCELERATED);
     load_media();
-
-    char map[];
-
-    map[0] = "########";
-    map[1] = "#000#00#";
-    map[2] = "###0#00#";
-    map[3] = "#000000#";
-    map[4] = "#00###0#";
-    map[5] = "#00#000#";
-    map[6] = "########";
 
     const float fps = 60;
     const int delta_time = roundf(1000.0f / 60.0f);
@@ -74,21 +81,29 @@ void handleInput(SDL_Event e)
             case SDLK_UP:
             case SDLK_w:
                 print_key("up");
+		// camera_offset_y -= 32;
+		player_pos_y -= 32;
                 break;
 
             case SDLK_DOWN:
             case SDLK_s:
                 print_key("down");
+		// camera_offset_y += 32;
+		player_pos_y += 32;
                 break;
 
             case SDLK_LEFT:
             case SDLK_a:
                 print_key("left");
+		// camera_offset_x -= 32;
+		player_pos_x -= 32;
                 break;
 
             case SDLK_RIGHT:
             case SDLK_d:
                 print_key("right");
+		// camera_offset_x += 32;
+		player_pos_x += 32;
                 break;
 
             default:
@@ -100,7 +115,7 @@ void handleInput(SDL_Event e)
 
 void print_key(char* key)
 {
-    printf("Key pressed: %s\n", key);
+    //    printf("Key pressed: %s\n", key);
 }
 
 void update()
@@ -108,21 +123,37 @@ void update()
     // ticks++;
 }
 
-float pos = 0.0001;
 void render(SDL_Renderer* renderer)
 {
     SDL_RenderClear(renderer);
 
     SDL_Rect rect;
-    rect.x = 32;
-    rect.y = 32;
+    rect.x = 0;
+    rect.y = 0;
     rect.w = 32;
     rect.h = 32;
 
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    for (int x = 0; x < 8; x++) {
+        for (int y = 0; y < 8; y++) {
+	    if (map[y][x] == 1) {
+		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+	    }
+	    if (map[y][x] == 0) {
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	    }
+	    rect.x = x * 32 + (32*6) + camera_offset_x;
+	    rect.y = y * 32 + (32*4) + camera_offset_y;
+	    SDL_RenderFillRect(renderer, &rect);
+	}
+    }
+
+    // draw player
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    rect.x = player_pos_x;
+    rect.y = player_pos_y;
     SDL_RenderFillRect(renderer, &rect);
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderPresent(renderer);
 }
 
@@ -132,8 +163,8 @@ void load_media(){
 TTF_Font* load_font(char* src, int size) {
     TTF_Font *font = TTF_OpenFont(src, size);
     if ( font == NULL )
-        printf( "Failed to load font! SDL_ttf Error: %s\n", TTF_GetError() );
+        printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError() );
     else
-        printf( "loaded: /usr/share/fonts/truetype/noto/NotoMono-Regular.ttf\n");
+        printf("loaded: /usr/share/fonts/truetype/noto/NotoMono-Regular.ttf\n");
     return font;
 }
