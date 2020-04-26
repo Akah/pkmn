@@ -2,6 +2,7 @@
 #include "input.h"
 #include <math.h>
 
+// TODO: extract to header file ln-6-23
 void handleInput(SDL_Event e);
 void update();
 void render(SDL_Renderer *renderer);
@@ -18,6 +19,9 @@ int camera_offset_y = 0;
 int player_pos_x = 9*32;
 int player_pos_y = 7*32;
 
+int npc_pos_x = 7*32;
+int npc_pos_y = 6*32;
+
 int map[8][8] =
     {
      {1,1,1,1,1,1,1,1}, 
@@ -29,7 +33,6 @@ int map[8][8] =
      {1,0,0,0,0,0,0,1},
      {1,1,1,1,1,1,1,1},
     };
-
 
 int main(int argc, char* args[])
 {
@@ -81,28 +84,28 @@ void handleInput(SDL_Event e)
             case SDLK_UP:
             case SDLK_w:
                 print_key("up");
-		// camera_offset_y -= 32;
+		camera_offset_y += 32;
 		player_pos_y -= 32;
                 break;
 
             case SDLK_DOWN:
             case SDLK_s:
                 print_key("down");
-		// camera_offset_y += 32;
+		camera_offset_y -= 32;
 		player_pos_y += 32;
                 break;
 
             case SDLK_LEFT:
             case SDLK_a:
                 print_key("left");
-		// camera_offset_x -= 32;
+		camera_offset_x += 32;
 		player_pos_x -= 32;
                 break;
 
             case SDLK_RIGHT:
             case SDLK_d:
                 print_key("right");
-		// camera_offset_x += 32;
+		camera_offset_x -= 32;
 		player_pos_x += 32;
                 break;
 
@@ -149,8 +152,14 @@ void render(SDL_Renderer* renderer)
 
     // draw player
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    rect.x = player_pos_x;
-    rect.y = player_pos_y;
+    rect.x = player_pos_x + camera_offset_x;
+    rect.y = player_pos_y + camera_offset_y;
+    SDL_RenderFillRect(renderer, &rect);
+
+    // draw npc
+    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+    rect.x = npc_pos_x + camera_offset_x;
+    rect.y = npc_pos_y + camera_offset_y;
     SDL_RenderFillRect(renderer, &rect);
     
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
