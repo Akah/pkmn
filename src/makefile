@@ -1,8 +1,8 @@
 #OBJS specifies which files to compile as part of the project
-OBJS = main.c init.c
+OBJS = main.c init.c draw.c
 
 #temp removal:
-DEL = main.o init.o
+DEL = main.o init.o draw.o
 
 CC = gcc
 
