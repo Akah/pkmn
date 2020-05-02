@@ -112,7 +112,7 @@ void handleInput(SDL_Event e)
 
     if (typing_mode){
 	add_to_string(command_string, e.key.keysym.sym);
-	printf("%c\n", e.key.keysym.sym);`
+	printf("%c\n", e.key.keysym.sym);
 	printf("%s\n", command_string);
     } else {
 	if (e.type == SDL_KEYUP) {
