@@ -12,6 +12,7 @@ OBJ_NAME = pkmn
 
 # dpkg only
 dependencies:
+	sudo apt update -y
 	sudo apt install -y libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev
 
 build : $(OBJS)
