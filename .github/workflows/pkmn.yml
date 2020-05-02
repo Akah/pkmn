@@ -12,4 +12,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: build
-      run: cd src/ && make depencencies build
+      run: cd src/ && make dependencies build
