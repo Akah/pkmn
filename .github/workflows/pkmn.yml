@@ -1,4 +1,4 @@
-name: PKMN CI
+name: BUILD
 
 on:
   push:
@@ -11,5 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: install dependencies
+      run: cd src/ && make dependencies ; cd ../
     - name: build
       run: cd src/ && make dependencies build
