@@ -1,5 +1,4 @@
-![PKMN CI](https://github.com/Akah/pkmn/workflows/PKMN%20CI/badge.svg)
-
+![BUILD](https://github.com/Akah/pkmn/workflows/BUILD/badge.svg)
 # PKMN
 A copy of pokemon using sdl
 
