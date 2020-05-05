@@ -1,38 +1,15 @@
-#include "init.h"
-#include "input.h"
-#include "draw.h"
+#include "main.h"
 
-#include <math.h>
-
-void handleInput(SDL_Event e);
-void update();
-void render(SDL_Renderer *renderer);
-long current_timestamp();
-void load_media();
-TTF_Font* load_font(char* src, int size);
-void move();
-
-int quit = 0;
+static int quit = 0;
 
 int camera_offset_x = 0;
 int camera_offset_y = 0;
 
-int player_pos_x = 9*32;
-int player_pos_y = 7*32;
+int player_pos_x = 9*SCALED_TILE_SIZE;
+int player_pos_y = 7*SCALED_TILE_SIZE;
 
-int npc_pos_x = 7*32;
-int npc_pos_y = 6*32;
-
-enum Move_Direction
-{
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
-    NONE,
-};
-
-enum Move_Direction move_direction = NONE;
+int npc_pos_x = 7*SCALED_TILE_SIZE;
+int npc_pos_y = 13*SCALED_TILE_SIZE;
 
 int map[16][16] =
 {
@@ -175,16 +152,16 @@ void render(SDL_Renderer* renderer)
     SDL_Rect rect;
     rect.x = 0;
     rect.y = 0;
-    rect.w = 32;
-    rect.h = 32;
+    rect.w = SCALED_TILE_SIZE;
+    rect.h = SCALED_TILE_SIZE;
 
     // should be based on the size of the map
     for (int x = 0; x < 16; x++)
     {
 	for (int y = 0; y < 16; y++)
 	{
-	    rect.x = x * 32 + (32*6) + camera_offset_x;
-	    rect.y = y * 32 + (32*4) + camera_offset_y;
+	    rect.x = x * SCALED_TILE_SIZE + (TILE_SIZE *10) + camera_offset_x;
+	    rect.y = y * SCALED_TILE_SIZE + (TILE_SIZE *6) + camera_offset_y;
 	    switch (map[x][y])
 	    {
 	      case 0:
