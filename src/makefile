@@ -4,7 +4,7 @@
 #temp removal:
 #DEL = main.o init.o draw.o
 
-CC = gcc
+CC = clang
 
 COMPILER_FLAGS = -Wall
 LINKER_FLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf -lm
