@@ -24,13 +24,13 @@ pkmn: main.o init.o draw.o
 	$(CC) $(LINKER_FLAGS) -o $(OBJ_NAME) main.o init.o draw.o
 
 main.o: main.c init.h input.h draw.h
-	$(CC) $(COMPILER_FLAGS) $(LINKER_FLAGS) -c main.c
+	$(CC) $(COMPILER_FLAGS) -c main.c
 
 init.o: init.c init.h
-	$(CC) $(COMPILER_FLAGS) $(LINKER_FLAGS) -c init.c
+	$(CC) $(COMPILER_FLAGS) -c init.c
 
 draw.o: draw.c draw.h
-	$(CC) $(COMPILER_FLAGS) $(LINKER_FLAGS) -c draw.c
+	$(CC) $(COMPILER_FLAGS) -c draw.c
 
 dependencies:
 	sudo apt update -y
