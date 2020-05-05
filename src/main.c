@@ -3,18 +3,14 @@
 #include "draw.h"
 
 #include <math.h>
-// TODO: replace 32 pixels with a defined tilesize
-// TODO: extract to header file ln-6-23
+
 void handleInput(SDL_Event e);
 void update();
 void render(SDL_Renderer *renderer);
 long current_timestamp();
-void print_key(char* key);
 void load_media();
 TTF_Font* load_font(char* src, int size);
 void move();
-void toggle_command_line();
-void add_to_string(char* old_string, char character);
 
 int quit = 0;
 
@@ -26,11 +22,6 @@ int player_pos_y = 7*32;
 
 int npc_pos_x = 7*32;
 int npc_pos_y = 6*32;
-
-char command_line_open = 0;
-char typing_mode = 0;
-
-char command_string[64];
 
 enum Move_Direction
 {
@@ -98,24 +89,16 @@ int main(int argc, char* args[])
     return 0;
 }
 
-void add_to_string(char* old_string, char character)
-{
-    strncat(old_string, old_string, character);
-}
-
 void handleInput(SDL_Event e) 
 {
     if( e.type == SDL_QUIT )
     {
         quit = 1;
     }
-
-    if (typing_mode){
-	add_to_string(command_string, e.key.keysym.sym);
-	printf("%c\n", e.key.keysym.sym);
-	printf("%s\n", command_string);
-    } else {
-	if (e.type == SDL_KEYUP) {
+    else
+    {
+	if (e.type == SDL_KEYUP)
+	{
 	    move_direction = NONE;
 	}
 	//User presses a key
@@ -144,7 +127,6 @@ void handleInput(SDL_Event e)
                 break;
 
 	    case SDLK_BACKQUOTE:
-		toggle_command_line();
 		break;
             default:
                 printf("undefined key pressed: %c\n", e.key.keysym.sym);
@@ -153,11 +135,6 @@ void handleInput(SDL_Event e)
 	}
     }
     
-}
-
-void print_key(char* key)
-{
-    //    printf("Key pressed: %s\n", key);
 }
 
 void update()
@@ -247,11 +224,4 @@ TTF_Font* load_font(char* src, int size) {
 	printf("loaded: %s\n", src);
     //printf("loaded: /usr/share/fonts/truetype/noto/NotoMono-Regular.ttf\n");
     return font;
-}
-
-void toggle_command_line()
-{
-    command_line_open = !command_line_open;
-    typing_mode = !typing_mode;
-    printf("commandline set to: %d\n", command_line_open);
 }
