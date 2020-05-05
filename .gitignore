@@ -4,6 +4,9 @@
 *~
 *#
 
+# uncleaned object files
+*.o
+
 # binary file
 pkmn
 
