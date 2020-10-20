@@ -1,6 +1,5 @@
 #include "common.h"
 
-typedef unsigned char colour;
+void render(SDL_Renderer* pRenderer);
 
-void draw_rect(SDL_Renderer* renderer, SDL_Rect rect, colour r, colour g,
-	       colour b, colour a);
+SDL_Rect rect(int x, int y, int w, int h);
