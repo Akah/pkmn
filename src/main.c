@@ -4,8 +4,6 @@ int main()
 {
     SDL_Window* pWindow = createWindow();
     SDL_Renderer* pRenderer = SDL_CreateRenderer(pWindow, -1 ,SDL_RENDERER_ACCELERATED);
-    quit = 0;
-    pQuit = &quit;
 
     main_loop(pRenderer);
 
@@ -18,13 +16,10 @@ int main()
 void main_loop(SDL_Renderer* pRenderer)
 {
     SDL_Event event;
-    int render_timer = roundf(1000.0f / 5.0f);
-    const int delta_time = roundf(1000.0f / 5.0f);
-
-    printf("%d", quit);
-    printf("%d", *pQuit);
+    int render_timer = roundf(1000.0f / 60.0f);
+    const int delta_time = roundf(1000.0f / 60.0f);
     
-    while (!*pQuit) {
+    while (!quit) {
 	const int start_ticks = SDL_GetTicks();
 
 	while (SDL_PollEvent(&event) !=0) {
@@ -34,7 +29,7 @@ void main_loop(SDL_Renderer* pRenderer)
 	render_timer -= delta_time;
 
 	if (render_timer <= 0) {
-	    printf("quit=%d\n", *pQuit);
+	    printf("quit=%d\n", quit);
 	    render(pRenderer);
 	    render_timer = delta_time;
 	}

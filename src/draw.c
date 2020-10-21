@@ -7,7 +7,7 @@ void render(SDL_Renderer* pRenderer)
 
     SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255);
     SDL_Rect rectangle = rect(100, 100, 100, 100);
-    
+
     SDL_RenderFillRect(pRenderer, &rectangle);
     SDL_RenderPresent(pRenderer);
 }
