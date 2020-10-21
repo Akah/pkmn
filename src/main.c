@@ -1,3 +1,4 @@
+#include "config.h"
 #include "main.h"
 
 int main()
