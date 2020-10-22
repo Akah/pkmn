@@ -14,7 +14,7 @@ jobs:
     - name: update apt
       run: sudo apt update -y
     - name: install dependencies
-	    run: sudo apt install -y libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev
+      run: sudo apt install -y libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev
     - name: auto configure
       run: autoreconf -i
     - name: configure
