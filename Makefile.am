@@ -1,6 +1,10 @@
 SUBDIRS = src
 dist_doc_DATA = README
 
+dependencies:
+	sudo apt update -y
+	sudo apt install -y libsdl2-dev libsdl2-image-dev
+
 clean-local:
 	@rm config.status configure config.log
 	@rm Makefile Makefile.in
