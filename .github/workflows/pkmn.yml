@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: install dependencies
+      run: sudo apt update -y
+	    run: sudo apt install -y libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev
     - name: auto configure
       run: autoreconf -i
     - name: configure
