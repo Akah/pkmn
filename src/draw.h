@@ -2,4 +2,4 @@
 
 void render(SDL_Renderer* pRenderer);
 
-SDL_Rect rect(int x, int y, int w, int h);
+void draw_rect(SDL_Renderer *renderer, SDL_Rect rect, SDL_Colour colour);
