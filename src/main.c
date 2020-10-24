@@ -38,7 +38,6 @@ void main_loop(SDL_Renderer* pRenderer)
 	}
 
 	fps_frames++;
-	printf("%d\n", fps_current);
 	if (fps_last < SDL_GetTicks() - 1000) {
 	    fps_last = SDL_GetTicks();
 	    fps_current = fps_frames;

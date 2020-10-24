@@ -1,4 +1,4 @@
-#include "common.h"
+#include "../common.h"
 
 void render(SDL_Renderer* pRenderer);
 

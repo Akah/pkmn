@@ -1,7 +1,6 @@
 #include "common.h"
-#include "init.h"
-#include "draw.h"
-#include "input.h"
-
+#include "init/init.h"
+#include "draw/draw.h"
+#include "input/input.h"
 
 void main_loop();

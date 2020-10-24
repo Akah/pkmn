@@ -6,9 +6,9 @@ AM_LDFLAGS = -lSDL2 -lSDL2_image -lm
 
 pkmn_SOURCES = \
 	main.c main.h \
-	draw.c draw.h \
-	init.c init.h \
-	input.c input.h \
+	draw/draw.c draw/draw.h \
+	init/init.c init/init.h \
+	input/input.c input/input.h \
 	common.h
 
 clean-local:
