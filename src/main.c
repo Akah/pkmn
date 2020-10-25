@@ -3,9 +3,11 @@
 
 int main()
 {
-    SDL_Window* pWindow = createWindow();
-    SDL_Renderer* pRenderer = SDL_CreateRenderer(pWindow, -1 ,SDL_RENDERER_ACCELERATED);
+    SDL_Window *pWindow = createWindow();
+    SDL_Renderer *pRenderer = SDL_CreateRenderer(pWindow, -1 ,SDL_RENDERER_ACCELERATED);
 
+    State *pState = initState();
+    
     main_loop(pRenderer);
 
     SDL_DestroyWindow(pWindow);
@@ -23,9 +25,11 @@ void main_loop(SDL_Renderer* pRenderer)
     int render_timer = roundf(1000.0f / 60.0f);
     const int delta_time = roundf(1000.0f / 60.0f);
 
+    // temp:
+    quit = 1;
     while (!quit) {
 	const int start_ticks = SDL_GetTicks();
-
+	
 	while (SDL_PollEvent(&event) !=0) {
 	    handle_input(event);
 	}
@@ -47,4 +51,5 @@ void main_loop(SDL_Renderer* pRenderer)
 	int end_ticks = SDL_GetTicks();
 	SDL_Delay(delta_time - (end_ticks - start_ticks));
     }
+
 }

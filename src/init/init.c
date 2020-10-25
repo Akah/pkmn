@@ -23,3 +23,23 @@ SDL_Window* createWindow()
 
     return window;
 }
+
+State *initState()
+{
+    const Overworld overworld = {
+	0,
+    };
+
+    const Start_menu start_menu = {
+	NEW_GAME
+    };
+    
+    static State state = {
+        OVERWORLD,
+	overworld,
+	start_menu,
+	0
+    };
+
+    return &state;
+}

@@ -5,3 +5,5 @@
 #define SCREEN_TITLE  "title"
 
 SDL_Window* createWindow();
+
+State* initState();
