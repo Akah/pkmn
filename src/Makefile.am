@@ -9,6 +9,7 @@ pkmn_SOURCES = \
 	draw/draw.c draw/draw.h \
 	init/init.c init/init.h \
 	input/input.c input/input.h \
+	state.c state.h \
 	common.h
 
 clean-local:

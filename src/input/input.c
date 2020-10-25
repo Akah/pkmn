@@ -10,12 +10,18 @@ void handle_input_event(SDL_Event event)
     }
 }
 
-void handle_input_key()
+void handle_input_key(State *pState)
 {
     const Uint8 *key_state = SDL_GetKeyboardState(NULL);
 
+    if (key_state[SDL_SCANCODE_RIGHT]) {
+	SDL_LogDebug(SDL_LOG_CATEGORY_TEST, "right pressed");
+	set_current_state(pState, 1);
+    }
+
     if (key_state[SDL_SCANCODE_LEFT]) {
-	printf("pressed a\n");
+	SDL_LogDebug(SDL_LOG_CATEGORY_TEST, "left  pressed");
+	set_current_state(pState, 0);
     }
 }
  

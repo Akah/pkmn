@@ -55,3 +55,4 @@ typedef struct {
 
 #endif
 
+void set_current_state(State *pState, enum states new_state);

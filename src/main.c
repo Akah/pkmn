@@ -31,7 +31,7 @@ void main_loop(SDL_Renderer *pRenderer, State *pState)
 	while (SDL_PollEvent(&event) !=0) {
 	    handle_input_event(event);
 	}
-	handle_input_key();
+	handle_input_key(pState);
 
 	render_timer -= delta_time;
 
