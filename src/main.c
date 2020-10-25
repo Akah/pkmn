@@ -8,7 +8,7 @@ int main()
 
     State *pState = initState();
     
-    main_loop(pRenderer);
+    main_loop(pRenderer, pState);
 
     SDL_DestroyWindow(pWindow);
     SDL_DestroyRenderer(pRenderer);
@@ -16,7 +16,7 @@ int main()
     return 0;
 }
 
-void main_loop(SDL_Renderer* pRenderer)
+void main_loop(SDL_Renderer *pRenderer, State *pState)
 {
     SDL_Event event;
     uint fps_last = SDL_GetTicks();
@@ -25,14 +25,13 @@ void main_loop(SDL_Renderer* pRenderer)
     int render_timer = roundf(1000.0f / 60.0f);
     const int delta_time = roundf(1000.0f / 60.0f);
 
-    // temp:
-    quit = 1;
     while (!quit) {
 	const int start_ticks = SDL_GetTicks();
 	
 	while (SDL_PollEvent(&event) !=0) {
-	    handle_input(event);
+	    handle_input_event(event);
 	}
+	handle_input_key();
 
 	render_timer -= delta_time;
 
