@@ -33,13 +33,13 @@ State *initState()
     const Start_menu start_menu = {
 	NEW_GAME
     };
-    
-    static State state = {
-        OVERWORLD,
-	overworld,
-	start_menu,
-	0
-    };
 
-    return &state;
+    State *state = malloc(sizeof(State));
+
+    state->current_state = OVERWORLD;
+    state->overworld = overworld;
+    state->start_menu = start_menu;
+    state->test = 0;
+
+    return state;
 }
