@@ -1,9 +1,10 @@
-/* #include "config.h" */
 #include "main.h"
+
+SDL_Window *pWindow;
 
 int main()
 {
-    SDL_Window *pWindow = createWindow();
+    pWindow = createWindow();
     SDL_Renderer *pRenderer = SDL_CreateRenderer(pWindow, -1 ,SDL_RENDERER_ACCELERATED);
 
     AssetManager *pAssetManager = init_asset_manager();
@@ -27,6 +28,7 @@ int main()
 
 void main_loop(SDL_Renderer *pRenderer, State *pState, AssetManager *pAssetManager)
 {
+    char title[16];
     SDL_Event event;
     uint fps_last = SDL_GetTicks();
     uint fps_current = 0;
@@ -50,14 +52,17 @@ void main_loop(SDL_Renderer *pRenderer, State *pState, AssetManager *pAssetManag
 	}
 
 	fps_frames++;
+	
 	if (fps_last < SDL_GetTicks() - 1000) {
 	    fps_last = SDL_GetTicks();
 	    fps_current = fps_frames;
+	    sprintf(title, "pkmn: %u fps", fps_frames);
+	    SDL_SetWindowTitle(pWindow, title);
 	    fps_frames = 0;
 	}
 
 	int end_ticks = SDL_GetTicks();
 	SDL_Delay(delta_time - (end_ticks - start_ticks));
     }
-
+   
 }
