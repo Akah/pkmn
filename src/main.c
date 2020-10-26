@@ -7,21 +7,13 @@ int main()
     pWindow = createWindow();
     SDL_Renderer *pRenderer = SDL_CreateRenderer(pWindow, -1 ,SDL_RENDERER_ACCELERATED);
 
-    AssetManager *pAssetManager = init_asset_manager();
+    AssetManager *pAssetManager = init_asset_manager(pRenderer);
     State *pState = initState();
-
-    SDL_Surface *surface = IMG_Load("../res/espeon-front.png");
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(pRenderer, surface);
-
-    pAssetManager->images->front[0] = texture;
     
     main_loop(pRenderer, pState, pAssetManager);
 
     SDL_DestroyWindow(pWindow);
     SDL_DestroyRenderer(pRenderer);
-
-    SDL_FreeSurface(surface);
-    SDL_DestroyTexture(texture);
     
     return 0;
 }

@@ -9,6 +9,7 @@ typedef struct {
     SDL_Texture *back[6];
     SDL_Texture *small[32];
     SDL_Texture *tilemap;
+    SDL_Texture *font;
 } AssetImages;
 
 // placeholder for sounds later;
