@@ -6,17 +6,26 @@ int main()
     SDL_Window *pWindow = createWindow();
     SDL_Renderer *pRenderer = SDL_CreateRenderer(pWindow, -1 ,SDL_RENDERER_ACCELERATED);
 
+    AssetManager *pAssetManager = init_asset_manager();
     State *pState = initState();
+
+    SDL_Surface *surface = IMG_Load("../res/espeon-front.png");
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(pRenderer, surface);
+
+    pAssetManager->images->front[0] = texture;
     
-    main_loop(pRenderer, pState);
+    main_loop(pRenderer, pState, pAssetManager);
 
     SDL_DestroyWindow(pWindow);
     SDL_DestroyRenderer(pRenderer);
+
+    SDL_FreeSurface(surface);
+    SDL_DestroyTexture(texture);
     
     return 0;
 }
 
-void main_loop(SDL_Renderer *pRenderer, State *pState)
+void main_loop(SDL_Renderer *pRenderer, State *pState, AssetManager *pAssetManager)
 {
     SDL_Event event;
     uint fps_last = SDL_GetTicks();
@@ -36,7 +45,7 @@ void main_loop(SDL_Renderer *pRenderer, State *pState)
 	render_timer -= delta_time;
 
 	if (render_timer <= 0) {
-	    render(pRenderer);
+	    render(pRenderer, pAssetManager);
 	    render_timer = delta_time;
 	}
 

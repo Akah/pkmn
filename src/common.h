@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include "state.h"
+#include "assets.h"
 
 #define SCREEN_WIDTH  640
 #define SCREEN_HEIGHT 480

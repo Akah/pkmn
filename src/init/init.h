@@ -1,5 +1,7 @@
 #include "../common.h"
 
-SDL_Window* createWindow();
+SDL_Window *createWindow();
 
-State* initState();
+State *initState();
+
+AssetManager *initAssetManager();

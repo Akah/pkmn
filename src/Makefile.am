@@ -10,6 +10,8 @@ pkmn_SOURCES = \
 	init/init.c init/init.h \
 	input/input.c input/input.h \
 	state.c state.h \
+	asset_manager.c asset_manager.h \
+	assets.h \
 	common.h
 
 clean-local:
