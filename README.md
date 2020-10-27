@@ -8,5 +8,6 @@ Intended to be an improved clone of Gen 2 Pokemon
 
 ## Build
  * autoreconf -i
- * ./configure
+ * mkdir build && cd build
+ * ../configure
  * make
