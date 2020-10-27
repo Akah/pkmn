@@ -1,4 +1,5 @@
 #include "main.h"
+#include <string.h>
 
 SDL_Window *pWindow;
 
