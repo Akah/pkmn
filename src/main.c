@@ -55,7 +55,12 @@ void main_loop(SDL_Renderer *pRenderer, State *pState, AssetManager *pAssetManag
 	}
 
 	int end_ticks = SDL_GetTicks();
-	SDL_Delay(delta_time - (end_ticks - start_ticks));
+
+	// slower systems start with negative delay time(i.e my vm)
+	int delay = delta_time - (end_ticks - start_ticks);
+	if (delay > 0) {
+	  SDL_Delay(delay);
+	}
     }
    
 }
