@@ -10,6 +10,7 @@ SDL_Texture *load_texture(SDL_Renderer *pRenderer, char *path)
 
 void load_default_images(SDL_Renderer *pRenderer, AssetImages *pImages)
 {
+    pImages->logo = load_texture(pRenderer, "../res/pokemon.png");
     pImages->font = load_texture(pRenderer, "../res/font-v3-4.png");
     pImages->front[0] = load_texture(pRenderer, "../res/espeon-front.png");
 }

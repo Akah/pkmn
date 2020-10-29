@@ -6,6 +6,7 @@ SDL_Window* createWindow()
 	printf("SDL_Init error: %s\n", SDL_GetError());
     }
 
+    // SDL_WINDOW_RESIZABLE
     SDL_Window* window =
 	SDL_CreateWindow(SCREEN_TITLE,
 			 SDL_WINDOWPOS_UNDEFINED,
