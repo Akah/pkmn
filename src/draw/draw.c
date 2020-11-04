@@ -1,21 +1,21 @@
 #include "draw.h"
 
-void render(SDL_Renderer* pRenderer, AssetManager *pAssetManager)
+void render()
 {
-    SDL_RenderClear(pRenderer);
+    SDL_RenderClear(renderer);
 
-    draw_start_screen(pRenderer, pAssetManager);
+    draw_start_screen(renderer, asset_manager);
 
-    SDL_RenderPresent(pRenderer);
+    SDL_RenderPresent(renderer);
 }
 
-void draw_rect(SDL_Renderer *renderer, SDL_Rect rect, SDL_Colour colour)
+void draw_rect(SDL_Rect rect, SDL_Colour colour)
 {
     SDL_SetRenderDrawColor(renderer, colour.r, colour.g, colour.b, colour.a);
     SDL_RenderFillRect(renderer, &rect);
 }
 
-void draw_image(SDL_Renderer *pRenderer, SDL_Texture *texture, int x, int y)
+void draw_image(SDL_Texture *texture, int x, int y)
 {
     int w, h;
 
@@ -23,10 +23,10 @@ void draw_image(SDL_Renderer *pRenderer, SDL_Texture *texture, int x, int y)
   
     SDL_Rect dst_rect = { x, y, (x+w)*SCALE, (y+h)*SCALE };
 	
-    SDL_RenderCopy(pRenderer, texture, NULL, &dst_rect);
+    SDL_RenderCopy(renderer, texture, NULL, &dst_rect);
 }
 
-void draw_char(SDL_Renderer *pRenderer,AssetManager *pAssetManager,char ch, int x, int y)
+void draw_char(char ch, int x, int y)
 {
     int row = (ch - 32) % 16;
     int col = (ch - 32) / 16;
@@ -35,23 +35,23 @@ void draw_char(SDL_Renderer *pRenderer,AssetManager *pAssetManager,char ch, int 
     SDL_Rect src_rect = {row * 8, col * 8, 8, 8};
 
     SDL_RenderCopy(
-	pRenderer,
-	pAssetManager->images->font,
+	renderer,
+	asset_manager->images->font,
 	&src_rect,
 	&dst_rect
     );
 }
 
-void draw_string(SDL_Renderer *pRenderer, AssetManager *pAssetManager, char *str, int x, int y)
+void draw_string(char *str, int x, int y)
 {
     int length = strlen(str);
     for (int i=0; i < length; i++) {
-	draw_char(pRenderer, pAssetManager, str[i], x, y);
+	draw_char(str[i], x, y);
 	x = x + 8 * SCALE;
     }
 }
 
-void draw_start_screen(SDL_Renderer *pRenderer, AssetManager *pAssetManager)
+void draw_start_screen()
 {
-  draw_image(pRenderer, pAssetManager->images->logo, 0, 0);
+  draw_image(asset_manager->images->logo, 0, 0);
 }

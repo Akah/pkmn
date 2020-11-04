@@ -1,8 +1,8 @@
 #include "common.h"
 
-SDL_Texture *load_texture(SDL_Renderer *pRenderer, char *path);
+SDL_Texture *load_texture(char *path);
 
-void load_default_images(SDL_Renderer *pRenderer, AssetImages *pImages);
+void load_default_images(AssetImages *pImages);
 
-AssetManager *init_asset_manager(SDL_Renderer *pRenderer);
+AssetManager *init_asset_manager();
 

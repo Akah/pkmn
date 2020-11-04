@@ -4,4 +4,4 @@
 #include "input/input.h"
 #include "asset/asset_manager.h"
 
-void main_loop(SDL_Renderer *pRenderer, State *pState, AssetManager *pAssetManager);
+void main_loop();

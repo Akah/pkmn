@@ -1,15 +1,15 @@
 #include "../common.h"
 
-void render(SDL_Renderer* pRenderer, AssetManager *pAssetManager);
+void render();
 
-void draw_rect(SDL_Renderer *renderer, SDL_Rect rect, SDL_Colour colour);
+void draw_rect(SDL_Rect rect, SDL_Colour colour);
 
-void draw_image(SDL_Renderer *pRenderer, SDL_Texture *pTexture, int x, int y);
+void draw_image(SDL_Texture *pTexture, int x, int y);
 
-void draw_image_cropped(SDL_Renderer *pRenderer, AssetManager *pAssetManager);
+void draw_image_cropped();
 
-void draw_char(SDL_Renderer *pRenderer, AssetManager *pAssetManager, char c, int x, int y);
+void draw_char(char c, int x, int y);
 
-void draw_string(SDL_Renderer *pRenderer, AssetManager *pAssetManager, char *str, int x, int y);
+void draw_string(char *str, int x, int y);
 
-void draw_start_screen(SDL_Renderer *pRenderer, AssetManager *pAssetManager);
+void draw_start_screen();

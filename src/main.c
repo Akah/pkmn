@@ -1,25 +1,27 @@
 #include "main.h"
 #include <string.h>
 
-SDL_Window *pWindow;
+SDL_Window *window;
+SDL_Renderer *renderer;
+AssetManager *asset_manager;
+State *state;
 
 int main()
 {
-    pWindow = createWindow();
-    SDL_Renderer *pRenderer = SDL_CreateRenderer(pWindow, -1 ,SDL_RENDERER_ACCELERATED);
-
-    AssetManager *pAssetManager = init_asset_manager(pRenderer);
-    State *pState = initState();
+    window = createWindow();
+    renderer = SDL_CreateRenderer(window, -1 ,SDL_RENDERER_ACCELERATED);
+    asset_manager = init_asset_manager(renderer);
+    state = initState();
     
-    main_loop(pRenderer, pState, pAssetManager);
+    main_loop();
 
-    SDL_DestroyWindow(pWindow);
-    SDL_DestroyRenderer(pRenderer);
+    SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(renderer);
     
     return 0;
 }
 
-void main_loop(SDL_Renderer *pRenderer, State *pState, AssetManager *pAssetManager)
+void main_loop()
 {
     char title[16];
     SDL_Event event;
@@ -35,12 +37,12 @@ void main_loop(SDL_Renderer *pRenderer, State *pState, AssetManager *pAssetManag
 	while (SDL_PollEvent(&event) !=0) {
 	    handle_input_event(event);
 	}
-	handle_input_key(pState);
+	handle_input_key(state);
 
 	render_timer -= delta_time;
 
 	if (render_timer <= 0) {
-	    render(pRenderer, pAssetManager);
+	    render(renderer, asset_manager);
 	    render_timer = delta_time;
 	}
 
@@ -50,7 +52,7 @@ void main_loop(SDL_Renderer *pRenderer, State *pState, AssetManager *pAssetManag
 	    fps_last = SDL_GetTicks();
 	    fps_current = fps_frames;
 	    sprintf(title, "pkmn: %u fps", fps_frames);
-	    SDL_SetWindowTitle(pWindow, title);
+	    SDL_SetWindowTitle(window, title);
 	    fps_frames = 0;
 	}
 
