@@ -1,5 +1,14 @@
 #include "draw.h"
 
+/**
+ * Scale screen position relative to screen scale value
+ * @param n input value
+ */
+int px(int n)
+{
+    return n * SCALE;
+}
+
 void render()
 {
     SDL_RenderClear(renderer);
@@ -21,7 +30,7 @@ void draw_image(SDL_Texture *texture, int x, int y)
 
     SDL_QueryTexture(texture, NULL, NULL, &w, &h);
   
-    SDL_Rect dst_rect = { x, y, (x+w)*SCALE, (y+h)*SCALE };
+    SDL_Rect dst_rect = { x, y, px(x+w), px(y+h) };
 	
     SDL_RenderCopy(renderer, texture, NULL, &dst_rect);
 }
@@ -46,12 +55,18 @@ void draw_string(char *str, int x, int y)
 {
     int length = strlen(str);
     for (int i=0; i < length; i++) {
-	draw_char(str[i], x, y);
-	x = x + 8 * SCALE;
+	draw_char(str[i], px(x), px(y));
+	x = x+8;
     }
 }
 
 void draw_start_screen()
 {
-  draw_image(asset_manager->images->logo, 0, 0);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
+    draw_image(asset_manager->images->logo, 45, 20);
+    
+    if ((SDL_GetTicks() / 1000) % 2) {
+	draw_string("Press any key", 55, 110);
+    }
 }
