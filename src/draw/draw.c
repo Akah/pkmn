@@ -13,8 +13,9 @@ void render()
 {
     SDL_RenderClear(renderer);
 
-    draw_start_screen(renderer, asset_manager);
-
+    /* draw_start_screen(renderer, asset_manager); */
+    draw_start_menu();
+    
     SDL_RenderPresent(renderer);
 }
 
@@ -58,6 +59,13 @@ void draw_string(char *str, int x, int y)
 	draw_char(str[i], px(x), px(y));
 	x = x+8;
     }
+}
+
+void draw_start_menu()
+{
+    draw_string("NEW GAME", 0, 0);
+    draw_string("CONTINUE", 0, 16);
+    draw_string("OPTIONS", 0, 32);
 }
 
 void draw_start_screen()

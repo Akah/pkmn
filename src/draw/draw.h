@@ -13,3 +13,5 @@ void draw_char(char c, int x, int y);
 void draw_string(char *str, int x, int y);
 
 void draw_start_screen();
+
+void draw_start_menu();

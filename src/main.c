@@ -1,10 +1,59 @@
 #include "main.h"
 #include <string.h>
+#include <time.h>
 
 SDL_Window *window;
 SDL_Renderer *renderer;
 AssetManager *asset_manager;
 State *state;
+
+time_t t;
+
+char *current_day(char* out)
+{
+    t = time(NULL);
+    struct tm *tm = localtime(&t);
+
+    switch (tm->tm_wday) {
+    case 0:
+	out = "SUNDAY";
+	break;
+    case 1:
+	out = "MONDAY";
+	break;
+    case 2:
+	out = "TUESDAY";
+	break;
+    case 3:
+	out = "WEDNESDAY";
+	break;
+    case 4:
+	out = "THURSDAY";
+	break;
+    case 5:
+	out = "FRIDAY";
+	break;
+    case 6:
+	out = "SATURDAY";
+	break;
+    default:
+	printf("Error getting current day. Check src/time.c");
+    }
+
+    return out;
+}
+
+char *current_time(char *out)
+{
+    time_t t = time(NULL);
+    struct tm * t_info;
+
+    time(&t);
+    t_info = localtime ( &t );
+
+    sprintf(out, "%d:%d", t_info->tm_hour, t_info->tm_min);
+    return out;
+}
 
 int main()
 {
@@ -12,6 +61,17 @@ int main()
     renderer = SDL_CreateRenderer(window, -1 ,SDL_RENDERER_ACCELERATED);
     asset_manager = init_asset_manager(renderer);
     state = initState();
+
+    char day[20];
+    char time[20];
+
+    strcopy(day, current_day(day));
+    strcopy(time, current_time(time));
+    
+    printf("%s\n", day);
+    printf("%s\n", time);
+    
+    quit = 1;
     
     main_loop();
 
