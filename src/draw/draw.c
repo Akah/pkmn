@@ -81,8 +81,8 @@ void draw_box(int x, int y, int w, int h)
 {
     SDL_Colour colour = {255, 255, 255, 255};
     SDL_Rect rect = {x, y, w, h};
-    //draw_rect(rect, colour);
-
+    draw_rect(rect, colour);
+    
     colour.r = 0;
     colour.g = 0;
     colour.b = 0;
@@ -94,6 +94,11 @@ void draw_box(int x, int y, int w, int h)
     int p5 = p1 * 5;
     int p6 = p1 * 6;
     int p7 = p1 * 7;
+
+    x += p3;
+    y += p3;
+    h -= p7;
+    w -= p7;
 
     rect = make_rect(x+p2, y, w-p4, p1);
     draw_rect(rect, colour);
@@ -155,7 +160,7 @@ void render()
     // draw_start_screen(renderer, asset_manager);
     // draw_start_menu();
 
-    draw_dialog(0, 0, 100, 100);
+    draw_dialog(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderPresent(renderer);
