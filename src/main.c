@@ -43,18 +43,6 @@ char *current_day(char* out)
     return out;
 }
 
-char *current_time(char *out)
-{
-    time_t t = time(NULL);
-    struct tm * t_info;
-
-    time(&t);
-    t_info = localtime ( &t );
-
-    sprintf(out, "%d:%d", t_info->tm_hour, t_info->tm_min);
-    return out;
-}
-
 int main()
 {
     window = createWindow();
@@ -62,16 +50,9 @@ int main()
     asset_manager = init_asset_manager(renderer);
     state = initState();
 
-    char day[20];
-    char time[20];
-
-    strcopy(day, current_day(day));
-    strcopy(time, current_time(time));
-    
+    char day[11];
+    current_day(day);
     printf("%s\n", day);
-    printf("%s\n", time);
-    
-    quit = 1;
     
     main_loop();
 

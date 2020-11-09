@@ -9,16 +9,6 @@ int px(int n)
     return n * SCALE;
 }
 
-void render()
-{
-    SDL_RenderClear(renderer);
-
-    /* draw_start_screen(renderer, asset_manager); */
-    draw_start_menu();
-    
-    SDL_RenderPresent(renderer);
-}
-
 void draw_rect(SDL_Rect rect, SDL_Colour colour)
 {
     SDL_SetRenderDrawColor(renderer, colour.r, colour.g, colour.b, colour.a);
@@ -63,9 +53,10 @@ void draw_string(char *str, int x, int y)
 
 void draw_start_menu()
 {
-    draw_string("NEW GAME", 0, 0);
-    draw_string("CONTINUE", 0, 16);
-    draw_string("OPTIONS", 0, 32);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    draw_string("NEW GAME", 8, 8);
+    draw_string("CONTINUE", 8, 24);
+    draw_string("OPTIONS", 8, 40);
 }
 
 void draw_start_screen()
@@ -77,4 +68,95 @@ void draw_start_screen()
     if ((SDL_GetTicks() / 1000) % 2) {
 	draw_string("Press any key", 55, 110);
     }
+}
+
+SDL_Rect make_rect(int x, int y, int w, int h);
+SDL_Rect make_rect(int x, int y, int w, int h)
+{
+    SDL_Rect rect = {x, y, w, h};
+    return rect;
+}
+
+void draw_box(int x, int y, int w, int h)
+{
+    SDL_Colour colour = {255, 255, 255, 255};
+    SDL_Rect rect = {x, y, w, h};
+    //draw_rect(rect, colour);
+
+    colour.r = 0;
+    colour.g = 0;
+    colour.b = 0;
+
+    int p1 = 3;
+    int p2 = p1 * 2;
+    int p3 = p1 * 3;
+    int p4 = p1 * 4;
+    int p5 = p1 * 5;
+    int p6 = p1 * 6;
+    int p7 = p1 * 7;
+
+    rect = make_rect(x+p2, y, w-p4, p1);
+    draw_rect(rect, colour);
+    
+    rect = make_rect(x+(w-p2), y+p1, p1, p1);
+    draw_rect(rect, colour);
+    
+    rect = make_rect(x+(w-p1), y+p2, p1, h-p4);
+    draw_rect(rect, colour);
+    
+    rect = make_rect(x, y+p2, p1, h-16);
+    draw_rect(rect, colour);
+    
+    rect = make_rect(x+(w-p2), y+(h-p3), p1, p2);
+    draw_rect(rect, colour);
+    
+    rect = make_rect(x+p2, y+(h-p2), w-p4, p2);
+    draw_rect(rect, colour);
+    
+    rect = make_rect(x+p1, y+(h-p3), p1, p2);
+    draw_rect(rect, colour);
+
+    rect = make_rect(x, y+p2, p1, h-p4);
+    draw_rect(rect, colour);
+    
+    rect = make_rect(x+p1, y+p1, p1, p1);
+    draw_rect(rect, colour);
+
+    /**************************************/
+
+    rect = make_rect(x+p3, y+p2, w-p6, p2);//
+    draw_rect(rect, colour);
+
+    rect = make_rect(x+p2, y+p3, p2, p2);//
+    draw_rect(rect, colour);
+
+    rect = make_rect(x+(w-p4), y+p3, p2, p2);//
+    draw_rect(rect, colour);
+
+    rect = make_rect(x+p2, y+p3, p1, h-p7);//
+    draw_rect(rect, colour);
+    
+    rect = make_rect(x+(w-p3), y+p3, p1, h-p7);//
+    draw_rect(rect, colour);
+    
+    rect = make_rect(x+p3, y+(h-p4), w-p6, p1);//
+    draw_rect(rect, colour);
+}
+
+void draw_dialog(int x, int y, int w, int h)
+{
+    draw_box(x, y, w, h);
+}
+
+void render()
+{
+    SDL_RenderClear(renderer);
+
+    // draw_start_screen(renderer, asset_manager);
+    // draw_start_menu();
+
+    draw_dialog(0, 0, 100, 100);
+    
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_RenderPresent(renderer);
 }

@@ -15,3 +15,7 @@ void draw_string(char *str, int x, int y);
 void draw_start_screen();
 
 void draw_start_menu();
+
+void draw_box(int x, int y, int w, int h);
+
+void draw_dialog(int x, int y, int w, int h);
