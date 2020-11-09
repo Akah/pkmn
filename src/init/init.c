@@ -35,11 +35,18 @@ State *initState()
 	NEW_GAME
     };
 
+    const Cursor cursor = {
+	0,
+	0,
+	1,
+    };
+
     State *state = malloc(sizeof(State));
 
     state->current_state = OVERWORLD;
     state->overworld = overworld;
     state->start_menu = start_menu;
+    state->cursor = cursor;
     state->test = 0;
 
     return state;

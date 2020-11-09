@@ -16,12 +16,20 @@ void handle_input_key()
 
     if (key_state[SDL_SCANCODE_RIGHT]) {
 	SDL_LogDebug(SDL_LOG_CATEGORY_TEST, "right pressed");
-	set_current_state(1);
     }
 
     if (key_state[SDL_SCANCODE_LEFT]) {
 	SDL_LogDebug(SDL_LOG_CATEGORY_TEST, "left  pressed");
-	set_current_state(0);
+    }
+
+    if (key_state[SDL_SCANCODE_DOWN]) {
+	SDL_LogDebug(SDL_LOG_CATEGORY_TEST, "down  pressed");
+	state->cursor.pos_y += 16 * SCALE;
+    }
+    
+    if (key_state[SDL_SCANCODE_UP]) {
+	SDL_LogDebug(SDL_LOG_CATEGORY_TEST, "up    pressed");
+	state->cursor.pos_y -= 16 * SCALE;
     }
 }
  

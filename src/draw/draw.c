@@ -51,25 +51,6 @@ void draw_string(char *str, int x, int y)
     }
 }
 
-void draw_start_menu()
-{
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    draw_string("NEW GAME", 8, 8);
-    draw_string("CONTINUE", 8, 24);
-    draw_string("OPTIONS", 8, 40);
-}
-
-void draw_start_screen()
-{
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-
-    draw_image(asset_manager->images->logo, 45, 20);
-    
-    if ((SDL_GetTicks() / 1000) % 2) {
-	draw_string("Press any key", 55, 110);
-    }
-}
-
 SDL_Rect make_rect(int x, int y, int w, int h);
 SDL_Rect make_rect(int x, int y, int w, int h)
 {
@@ -153,14 +134,33 @@ void draw_dialog(int x, int y, int w, int h)
     draw_box(x, y, w, h);
 }
 
+void draw_start_menu()
+{
+    draw_dialog(0, 0, px(120), px(70));
+    draw_string("NEW GAME", 16, 16);
+    draw_string("CONTINUE", 16, 32);
+    draw_string("OPTIONS", 16, 48);
+    
+    draw_char('~', state->cursor.pos_x + 21, state->cursor.pos_y + 48);
+}
+
+void draw_start_screen()
+{
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
+    draw_image(asset_manager->images->logo, 45, 20);
+    
+    if ((SDL_GetTicks() / 1000) % 2) {
+	draw_string("Press any key", 55, 110);
+    }
+}
+
 void render()
 {
     SDL_RenderClear(renderer);
 
     // draw_start_screen(renderer, asset_manager);
-    // draw_start_menu();
-
-    draw_dialog(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    draw_start_menu();
     
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderPresent(renderer);

@@ -47,9 +47,16 @@ typedef struct {
 } Overworld;
 
 typedef struct {
+    int pos_x;
+    int pos_y;
+    int active;
+} Cursor;
+
+typedef struct {
     enum states current_state;
     Overworld overworld;
     Start_menu start_menu;
+    Cursor cursor;
     int test;
 } State;
 
