@@ -66,10 +66,12 @@ void main_loop()
 {
     char title[16];
     SDL_Event event;
+    uint last_input_ticks = 0;
     uint fps_last = SDL_GetTicks();
     uint fps_current = 0;
     uint fps_frames = 0;
     int render_timer = roundf(1000.0f / 60.0f);
+    
     const int delta_time = roundf(1000.0f / 60.0f);
 
     while (!quit) {
@@ -78,7 +80,11 @@ void main_loop()
 	while (SDL_PollEvent(&event) !=0) {
 	    handle_input_event(event);
 	}
-	handle_input_key(state);
+
+	if (SDL_GetTicks() > last_input_ticks + 1000) {
+	    handle_input_key(state);
+	    last_input_ticks = SDL_GetTicks();
+	}
 
 	render_timer -= delta_time;
 
