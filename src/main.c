@@ -81,7 +81,7 @@ void main_loop()
 	    handle_input_event(event);
 	}
 
-	if (SDL_GetTicks() > last_input_ticks + 1000) {
+	if (SDL_GetTicks() > last_input_ticks + 300) {
 	    handle_input_key(state);
 	    last_input_ticks = SDL_GetTicks();
 	}

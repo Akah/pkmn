@@ -43,7 +43,7 @@ State *initState()
 
     State *state = malloc(sizeof(State));
 
-    state->current_state = OVERWORLD;
+    state->current_state = START_MENU; // change later to into;
     state->overworld = overworld;
     state->start_menu = start_menu;
     state->cursor = cursor;

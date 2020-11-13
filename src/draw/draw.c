@@ -141,7 +141,7 @@ void draw_start_menu()
     draw_string("CONTINUE", 16, 32);
     draw_string("OPTIONS", 16, 48);
     
-    draw_char('~', state->cursor.pos_x + 21, state->cursor.pos_y + 48);
+    draw_char('~', 21, (state->start_menu.items*16*3) + 48);
 }
 
 void draw_start_screen()
