@@ -12,6 +12,7 @@ pkmn_SOURCES = \
 	state.c state.h \
 	asset/asset_manager.c asset/asset_manager.h \
 	asset/assets.h \
+	time/date_time.c time/date_time.h
 	common.h
 
 clean-local:
