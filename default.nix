@@ -1,7 +1,7 @@
 with import <nixpkgs> {}; {
-    pkmnEnv = gcc8Stdenv.mkDerivation {
-        name = "pkmn-env";
-        buildInputs = [
+  pkmnEnv = gcc8Stdenv.mkDerivation {
+    name = "pkmn-env";
+    buildInputs = [
 	    pkg-config
 	    stdenv
 	    gcc
@@ -10,7 +10,7 @@ with import <nixpkgs> {}; {
 	    gnumake
 	    automake
 	    autoconf
-	];
-    };
+	  ];
+  };
 }
 
