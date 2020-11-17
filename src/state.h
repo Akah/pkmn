@@ -58,6 +58,7 @@ typedef struct {
     Start_menu start_menu;
     Cursor cursor;
     int test;
+    char time[8];
 } State;
 
 #endif

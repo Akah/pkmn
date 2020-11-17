@@ -7,52 +7,12 @@ SDL_Renderer *renderer;
 AssetManager *asset_manager;
 State *state;
 
-time_t t;
-
-char *current_day(char* out)
-{
-    t = time(NULL);
-    struct tm *tm = localtime(&t);
-
-    switch (tm->tm_wday) {
-    case 0:
-	out = "SUNDAY";
-	break;
-    case 1:
-	out = "MONDAY";
-	break;
-    case 2:
-	out = "TUESDAY";
-	break;
-    case 3:
-	out = "WEDNESDAY";
-	break;
-    case 4:
-	out = "THURSDAY";
-	break;
-    case 5:
-	out = "FRIDAY";
-	break;
-    case 6:
-	out = "SATURDAY";
-	break;
-    default:
-	printf("Error getting current day. Check src/time.c");
-    }
-
-    return out;
-}
-
 int main()
 {
     window = createWindow();
     renderer = SDL_CreateRenderer(window, -1 ,SDL_RENDERER_ACCELERATED);
     asset_manager = init_asset_manager(renderer);
     state = initState();
-
-    char day[11];
-    current_day(day);
-    printf("%s\n", day);
     
     main_loop();
 
@@ -74,8 +34,20 @@ void main_loop()
     
     const int delta_time = roundf(1000.0f / 60.0f);
 
+    time_t t;
+    struct tm *tm;
+    uint time_ticks = 2000;
+
     while (!quit) {
 	const int start_ticks = SDL_GetTicks();
+
+	if (SDL_GetTicks() > time_ticks + 1000) {
+	    t = time(NULL);
+	    tm = localtime(&t);
+	    sprintf(state->time, "%d:%d", tm->tm_hour, tm->tm_min);
+	    printf("%s\n", state->time);
+	    time_ticks = SDL_GetTicks();
+	}
 	
 	while (SDL_PollEvent(&event) !=0) {
 	    handle_input_event(event);
