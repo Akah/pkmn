@@ -41,6 +41,11 @@ State *initState()
 	1,
     };
 
+    const Time time = {
+	"00:00",
+	"MON"
+    };
+    
     State *state = malloc(sizeof(State));
 
     state->current_state = START_MENU; // change later to into;
@@ -48,6 +53,7 @@ State *initState()
     state->start_menu = start_menu;
     state->cursor = cursor;
     state->test = 0;
+    state->time = time;
 
     return state;
 }

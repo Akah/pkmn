@@ -53,12 +53,17 @@ typedef struct {
 } Cursor;
 
 typedef struct {
+    char time[7];
+    char day[5];
+} Time;
+
+typedef struct {
     enum states current_state;
     Overworld overworld;
     Start_menu start_menu;
     Cursor cursor;
     int test;
-    char time[8];
+    Time time;
 } State;
 
 #endif
