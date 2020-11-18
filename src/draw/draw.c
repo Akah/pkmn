@@ -142,6 +142,10 @@ void draw_start_menu()
     draw_string("OPTIONS", 16, 48);
     
     draw_char('~', 21, (state->start_menu.items*16*3) + 48);
+
+    draw_dialog(0, px(120), SCREEN_WIDTH, SCREEN_HEIGHT - px(120));
+    draw_string(state->time.day, 8, 128);
+    draw_string(state->time.time, 40, 136);
 }
 
 void draw_start_screen()

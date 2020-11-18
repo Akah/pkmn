@@ -45,11 +45,7 @@ void main_loop()
 	    t = time(NULL);
 	    tm = localtime(&t);
 	    sprintf(state->time.time, "%d:%d", tm->tm_hour, tm->tm_min);
-
 	    get_day(tm->tm_wday, state->time.day);
-
-	    printf("%s\n", state->time.time);
-	    printf("%s\n", state->time.day);
 	    time_ticks = SDL_GetTicks();
 	}
 	
