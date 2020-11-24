@@ -1,0 +1,28 @@
+* alternate image drawing...
+** Writing to a file
+/Currently/ first 4 bytes of file are used for the colours. If 16 bit colour is to be used then this /could/ be reduced to two colours per byte halfing the space required. The remaining bytes are then used for pixel data. Again, /currently/, each byte is one pixel. However, assuming that each image only uses 4 different colours this could similarly be reduced to 2 bits per pixel, a quadruple reduction, with each byte containing 4 pixels. 
+#+NAME: write to file
+#+BEGIN_SRC c
+void write_file(void)
+{
+    FILE *ptr;
+    unsigned char a[] = {
+	0x00, 0xff, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00
+    }; 
+    ptr = fopen("test.bin","wb"); 
+    fwrite(a, sizeof(unsigned char), sizeof(a)/sizeof(a[0]), ptr);
+    fclose (ptr);
+}
+#+END_SRC
+
+** Reading a file
+When read from, the binary data can be parsed to a struct matching the data in the file which can then be used to draw the image. The only question is whether the image width and hight information should be included in the binary file or simply inferred through code (i.e if drawing a sprite then the image is 16x16 or a character image: 32x32).
+
+#+NAME: struct
+#+BEGIN_SRC c
+typedef struct {
+    unsigned char colours[4];
+    unsigned char *pixels;
+} image;
+#+END_SRC
