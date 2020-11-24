@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include "asset/assets.h"
 #include "state.h"
+#include "asset/assets.h"
 #include "time/date_time.h"
 
 #define SCREEN_WIDTH  640

@@ -159,12 +159,32 @@ void draw_start_screen()
     }
 }
 
+void draw_binary()
+{
+    // doesnt work 
+    SDL_Rect rect = {0,0,10,10};
+    for (int i=0; i<sizeof(asset_manager->images->test); i++) {
+	if (asset_manager->images->test->pixels[i] == 1) {
+	    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+	} else {
+	    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+	}
+	rect.x = 10 * i;
+	rect.y = 10 * (i % 3);
+
+	
+	SDL_RenderFillRect(renderer, &rect);
+    }
+}
+
+
 void render()
 {
     SDL_RenderClear(renderer);
 
     // draw_start_screen(renderer, asset_manager);
-    draw_start_menu();
+    // draw_start_menu();
+    draw_binary();
     
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderPresent(renderer);

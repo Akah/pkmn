@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include "../state.h"
 
 #ifndef ASSETS_H
 #define ASSETS_H
@@ -11,6 +12,7 @@ typedef struct {
     SDL_Texture *tilemap;
     SDL_Texture *font;
     SDL_Texture *logo;
+    Image *test;
 } AssetImages;
 
 // placeholder for sounds later;

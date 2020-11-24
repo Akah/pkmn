@@ -39,6 +39,11 @@ struct character {
 };
 
 typedef struct {
+    unsigned char colours[4];
+    unsigned char *pixels;
+} Image;
+
+typedef struct {
     enum start_menu_items items;
 } Start_menu;
 
