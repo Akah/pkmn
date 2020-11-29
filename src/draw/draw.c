@@ -72,7 +72,6 @@ void draw_box(int x, int y, int w, int h)
     int p2 = p1 * 2;
     int p3 = p1 * 3;
     int p4 = p1 * 4;
-    int p5 = p1 * 5;
     int p6 = p1 * 6;
     int p7 = p1 * 7;
 
@@ -159,21 +158,32 @@ void draw_start_screen()
     }
 }
 
+int flag = 0;
 void draw_binary()
 {
     // doesnt work 
     SDL_Rect rect = {0,0,10,10};
-    for (int i=0; i<sizeof(asset_manager->images->test); i++) {
+    for (int i=0; i<23; i++) {
+	if (!flag) {
+	    printf("%x, ", asset_manager->images->test->pixels[i]);
+	}
 	if (asset_manager->images->test->pixels[i] == 1) {
 	    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 	} else {
 	    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 	}
-	rect.x = 10 * i;
-	rect.y = 10 * (i % 3);
+	if (i%3 == 0){
+	    rect.y += 10;
+	    rect.x = 0;
+	} else {
+	    rect.x = 10 * (i % 3);
+	}
 
-	
 	SDL_RenderFillRect(renderer, &rect);
+    }
+    if (!flag) {
+	printf("\n");
+	flag = 1;
     }
 }
 

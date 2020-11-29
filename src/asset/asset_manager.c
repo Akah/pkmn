@@ -22,10 +22,9 @@ void read_image_file(int image_size, char *src, Image *test)
     }
     printf("\n");
     for (int i=4; i<file_size; i++) {
-	test->pixels[i] = buffer[i];
-	printf("%x ", buffer[i]);
+	test->pixels[i-4] = buffer[i];
 	if (i % 3 == 0) printf("\n");
-    }   
+    }
 }
 
 void load_default_images(AssetImages *pImages)
