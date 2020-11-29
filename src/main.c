@@ -14,7 +14,7 @@ int main()
     asset_manager = init_asset_manager(renderer);
     state = initState();
     
-    main_loop();
+    //main_loop();
 
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);

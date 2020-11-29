@@ -21,10 +21,20 @@ void read_image_file(int image_size, char *src, Image *test)
 	test->colours[i] = buffer[i];
     }
     printf("\n");
+    int check = 0;
     for (int i=4; i<file_size; i++) {
 	test->pixels[i-4] = buffer[i];
+	printf("test->pixels[%d] = %u\n", i-4, buffer[i]);
+//	printf("(%d) %u - %u\n", i, test->pixels[i-4], buffer[i]);
 	if (i % 3 == 0) printf("\n");
+	check++;
     }
+
+    printf("check %d", check);
+
+    printf("pixels size %lu\n", sizeof(test->pixels)/sizeof(unsigned char));
+
+    printf("test size (bytes) %lu\n", (sizeof(unsigned char)*4)+(sizeof(unsigned char)*15));
 }
 
 void load_default_images(AssetImages *pImages)
@@ -33,8 +43,8 @@ void load_default_images(AssetImages *pImages)
     pImages->font = load_texture("../res/font-v3-4.png");
     pImages->front[0] = load_texture("../res/espeon-front.png");
     // TODO: extract out into function...
-    pImages->test = malloc((sizeof(char)*4)+(sizeof(char)*15));
-    pImages->test->pixels = malloc(sizeof(char)*15);
+    pImages->test = malloc((sizeof(unsigned char)*4)+(sizeof(unsigned char)*15));
+    pImages->test->pixels = malloc(sizeof(unsigned char)*15);
     read_image_file(15, "../res/bins/test.bin", pImages->test);
 }
 

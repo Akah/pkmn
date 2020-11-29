@@ -163,7 +163,7 @@ void draw_binary()
 {
     // doesnt work 
     SDL_Rect rect = {0,0,10,10};
-    for (int i=0; i<23; i++) {
+    for (int i=0; i<sizeof(asset_manager->images->test->pixels); i++) {
 	if (!flag) {
 	    printf("%x, ", asset_manager->images->test->pixels[i]);
 	}
