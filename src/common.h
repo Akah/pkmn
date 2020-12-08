@@ -13,6 +13,7 @@
 extern int quit;
 extern int* pQuit;
 
+extern SDL_Window *window;
 extern SDL_Renderer *renderer;
 extern AssetManager *asset_manager;
 extern State *state;

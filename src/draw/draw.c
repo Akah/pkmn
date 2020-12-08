@@ -151,7 +151,7 @@ void draw_start_screen()
 {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-    draw_image(asset_manager->images->logo, 45, 20);
+    //draw_image(asset_manager->images->logo, 45, 20);
     
     if ((SDL_GetTicks() / 1000) % 2) {
 	draw_string("Press any key", 55, 110);
@@ -194,8 +194,47 @@ void render()
 
     // draw_start_screen(renderer, asset_manager);
     // draw_start_menu();
-    draw_binary();
+    /* draw_binary(); */
+
+    SDL_Surface *surface = asset_manager->images->front[0];
+    //SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+    /* SDL_PixelFormat *format = surface->format; */
+
+    /* SDL_LockSurface(surface); */
+    /* Uint32 pixel = *((Uint32*)surface->pixels); */
+    /* SDL_UnlockSurface(surface); */
+
+    /* if (format->BitsPerPixel!=8) { */
+    /* 	fprintf(stderr, "Not an 8 bit surface.\n");    } */
+
+    /* SDL_LockSurface(surface); */
+
+    /* Uint8 index = *(Uint8*)surface->pixels; */
+
+    /* for (int i=0; i<300; i++) { */
+    /* 	SDL_Colour *colour = &format->palette->colors[i]; */
+    /* 	printf("Pixel Color-> %d, %d, %d, %d\n", colour->r, colour->g, colour->b, i); */
+    /* } */
+
     
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    /* SDL_UnlockSurface(surface); */
+
+    int y, x = 1;
+
+    size_t* pixels = (Uint8*)surface->pixels;
+    printf("%d\n", sizeof(surface->pixels));
+    Uint8* pixel = pixels + y*surface->pitch/4 + x; // offset of pointer
+    *pixel = SDL_MapRGB(surface->format,0x00,0x00,0x00);
+
+    for (int i=0; i<sizeof(pixels)/sizeof(pixels[0]); i++) {
+	pixels[0] = SDL_MapRGB(surface->format, 0x00, 0x00, 0x00);
+    }
+
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+    draw_image(texture, 0, 0);
+	
     SDL_RenderPresent(renderer);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 }

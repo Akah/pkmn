@@ -6,7 +6,7 @@
 
 // possibly change to surfaces... idk
 typedef struct {
-    SDL_Texture *front[12];
+    SDL_Surface *front[12];
     SDL_Texture *back[6];
     SDL_Texture *small[32];
     SDL_Texture *tilemap;

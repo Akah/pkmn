@@ -9,12 +9,14 @@ State *state;
 
 int main()
 {
+    printf("before window");
     window = createWindow();
+    printf("after window");
     renderer = SDL_CreateRenderer(window, -1 ,SDL_RENDERER_ACCELERATED);
     asset_manager = init_asset_manager(renderer);
     state = initState();
     
-    //main_loop();
+    main_loop();
 
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
