@@ -197,6 +197,9 @@ void render()
     /* draw_binary(); */
 
     SDL_Surface *surface = asset_manager->images->front[0];
+    if (surface == NULL) {
+	printf("surface is null\n");
+    }
     //SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
 
     /* SDL_PixelFormat *format = surface->format; */
@@ -222,14 +225,23 @@ void render()
 
     int y, x = 1;
 
-    size_t* pixels = (Uint8*)surface->pixels;
-    printf("%d\n", sizeof(surface->pixels));
-    Uint8* pixel = pixels + y*surface->pitch/4 + x; // offset of pointer
-    *pixel = SDL_MapRGB(surface->format,0x00,0x00,0x00);
 
-    for (int i=0; i<sizeof(pixels)/sizeof(pixels[0]); i++) {
-	pixels[0] = SDL_MapRGB(surface->format, 0x00, 0x00, 0x00);
+    //Uint32* pixel = pixels + y*surface->pitch/4 + x; // offset of pointer
+    //*pixel = SDL_MapRGB(surface->format,0x00,0x00,0x00);
+
+    SDL_LockSurface(surface);
+    Uint32* pixels = surface->pixels;
+    for (int i=0; i<(surface->w*surface->h)-1; i++) {
+	//pixels[i] = (255<<16)+(255<<8)+(255);// SDL_MapRGB(surface->format, 0x00, 0x00, 0x00);
+	printf("%d\n", pixels[0]);
+	/* if (pixels[0]==NULL) { */
+	/*     printf("pixel was null\n"); */
+	/*     return; */
+	/* } */
+	/* pixels[i] = 0; */
     }
+
+    SDL_UnlockSurface(surface);
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
 
