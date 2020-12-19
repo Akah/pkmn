@@ -16,6 +16,7 @@ void load_default_images(AssetImages *pImages)
     pImages->logo = load_texture("../res/images/pokemon.png");
     pImages->font = load_texture("../res/images/font-v3-4.png");
     pImages->front[0] = IMG_Load("../res/images/espeon-front.png");
+    pImages->front[1] = IMG_Load("../res/images/umbreon-front.png");
     if (pImages->front[0] == NULL) {
 	printf("front is null\n");
     }
