@@ -21,3 +21,5 @@ void draw_box(int x, int y, int w, int h);
 void draw_binary();
 
 void draw_dialog(int x, int y, int w, int h);
+
+void draw_player_status();

@@ -6,7 +6,7 @@
  */
 int px(int n)
 {
-    return n * 4;// SCALE;
+    return n * SCALE;
 }
 
 void draw_rect(SDL_Rect rect, SDL_Colour colour)
@@ -21,7 +21,7 @@ void draw_image(SDL_Texture *texture, int x, int y)
 
     SDL_QueryTexture(texture, NULL, NULL, &w, &h);
   
-    SDL_Rect dst_rect = { x, y, px(x+w), px(y+h) };
+    SDL_Rect dst_rect = { x, y, px(w), px(h) };
 	
     SDL_RenderCopy(renderer, texture, NULL, &dst_rect);
 }
@@ -158,35 +158,14 @@ void draw_start_screen()
     }
 }
 
-int flag = 0;
-void draw_binary()
+void draw_player_status()
 {
-    // doesnt work 
-    SDL_Rect rect = {0,0,10,10};
-    for (int i=0; i<sizeof(asset_manager->images->test->pixels); i++) {
-	if (!flag) {
-	    printf("%x, ", asset_manager->images->test->pixels[i]);
-	}
-	if (asset_manager->images->test->pixels[i] == 1) {
-	    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-	} else {
-	    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-	}
-	if (i%3 == 0){
-	    rect.y += 10;
-	    rect.x = 0;
-	} else {
-	    rect.x = 10 * (i % 3);
-	}
-
-	SDL_RenderFillRect(renderer, &rect);
-    }
-    if (!flag) {
-	printf("\n");
-	flag = 1;
-    }
+    draw_image(asset_manager->images->player_status, 180, 158);
+    SDL_Colour health = {0, 107, 0};
+    draw_rect(make_rect(252, 214, 144, 6), health);
+    draw_string("ESPEON", 68, 52);
+    draw_string("65", 108, 61);
 }
-
 
 void render()
 {
@@ -194,24 +173,12 @@ void render()
 
     // draw_start_screen(renderer, asset_manager);
     // draw_start_menu();
-    /* draw_binary(); */
 
-    SDL_Surface *surface = asset_manager->images->front[1];
-    if (surface == NULL) {
-	printf("surface is null\n");
-    }
+    draw_image(asset_manager->images->back[0], 0, 112);
+    draw_image(asset_manager->images->front[1], 250, 0);
 
-
-    Uint32* pixels = (Uint32*)surface->pixels;
-    SDL_Colour colour = {66, 135, 245};
-    surface->format->palette->colors[3] = colour;
+    draw_player_status();
     
-    //SDL_UnlockSurface(surface);
-
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
-
-    draw_image(texture, 0, 0);
-	
     SDL_RenderPresent(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 }

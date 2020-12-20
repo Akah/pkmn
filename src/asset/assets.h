@@ -6,13 +6,14 @@
 
 // possibly change to surfaces... idk
 typedef struct {
-    SDL_Surface *front[12];
-    SDL_Texture *back[6];
-    SDL_Texture *small[32];
-    SDL_Texture *tilemap;
+    SDL_Texture *front[12]; // player's party front and back
+    SDL_Texture *back[6];   // enemy's party only ever front
+    SDL_Texture *small[32]; // pokemon npcs on map / in party menu
+    SDL_Texture *tilemap;   // all tiles ? or only tiles from current area
     SDL_Texture *font;
-    SDL_Texture *logo;
-    Image *test;
+    SDL_Texture *logo;      // intro screen
+    SDL_Texture *player_status;
+    SDL_Texture *enemy_status;
 } AssetImages;
 
 // placeholder for sounds later;
