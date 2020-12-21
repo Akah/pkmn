@@ -160,11 +160,29 @@ void draw_start_screen()
 
 void draw_player_status()
 {
+    // passed as parameters when struct for player party created:
+    // i.e pokemon struct passed for current pokemon
+    char *name = "ESPEON";
+    float health = 10;
+    float health_max = 120;
+    char status = 0; // enum of status types
+    float exp_nxt_lvl = 3100;
+    float exp = 3099;
+
+    int health_val = 144*(health/health_max);
+    int exp_val = -(192*(exp/exp_nxt_lvl));
+    
     draw_image(asset_manager->images->player_status, 180, 158);
-    SDL_Colour health = {0, 107, 0};
-    draw_rect(make_rect(252, 214, 144, 6), health);
+    SDL_Colour health_colour = {0x00, 0xb8, 0x00}; // green
+    SDL_Colour exp_colour = {0x20, 0x88, 0xf8};
+    draw_rect(make_rect(252, 214, health_val, 6), health_colour);
+    draw_rect(make_rect(396, 265, exp_val, 6), exp_colour);
     draw_string("ESPEON", 68, 52);
     draw_string("65", 108, 61);
+
+    char health_str[8];
+    sprintf(health_str, "%3d/%3d", (int)health, (int)health_max);
+    draw_string(health_str, 76, 76);
 }
 
 void render()
