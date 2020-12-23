@@ -4,6 +4,7 @@
 #include "state.h"
 #include "asset/assets.h"
 #include "time/date_time.h"
+#include "math.h"
 
 #define SCREEN_WIDTH  640
 #define SCREEN_HEIGHT 480

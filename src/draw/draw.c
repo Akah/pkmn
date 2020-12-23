@@ -163,17 +163,19 @@ void draw_player_status()
     // passed as parameters when struct for player party created:
     // i.e pokemon struct passed for current pokemon
     char *name = "ESPEON";
-    float health = 10;
+    float health = 120;
     float health_max = 120;
     char status = 0; // enum of status types
     float exp_nxt_lvl = 3100;
     float exp = 3099;
 
-    int health_val = 144*(health/health_max);
+    int health_val = ceil((health/health_max)*144);
     int exp_val = -(192*(exp/exp_nxt_lvl));
     
     draw_image(asset_manager->images->player_status, 180, 158);
-    SDL_Colour health_colour = {0x00, 0xb8, 0x00}; // green
+
+    SDL_Colour health_colour = get_health_colour(health, health_max);
+    
     SDL_Colour exp_colour = {0x20, 0x88, 0xf8};
     draw_rect(make_rect(252, 214, health_val, 6), health_colour);
     draw_rect(make_rect(396, 265, exp_val, 6), exp_colour);
@@ -183,6 +185,32 @@ void draw_player_status()
     char health_str[8];
     sprintf(health_str, "%3d/%3d", (int)health, (int)health_max);
     draw_string(health_str, 76, 76);
+}
+
+void draw_enemy_status()
+{
+    draw_string("UMBREON", 2, 0);
+    draw_image(asset_manager->images->enemy_status, 8, 32);
+}
+
+SDL_Colour get_health_colour(int health, int health_max)
+{
+    SDL_Colour colour;
+    int health_percent = ceil(((float)health/(float)health_max)*100);
+    if (health_percent > 50) {
+	colour.r = 0;
+	colour.g = 184;
+	colour.b = 0;
+    } else if (health_percent > 10) {
+	colour.r = 247;
+	colour.g = 172;
+	colour.b = 5;
+    } else {
+	colour.r = 248;
+	colour.g = 0;
+	colour.b = 0;
+    }
+    return colour;
 }
 
 void render()
@@ -196,6 +224,7 @@ void render()
     draw_image(asset_manager->images->front[1], 250, 0);
 
     draw_player_status();
+    draw_enemy_status();
     
     SDL_RenderPresent(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);

@@ -23,3 +23,5 @@ void draw_binary();
 void draw_dialog(int x, int y, int w, int h);
 
 void draw_player_status();
+
+SDL_Colour get_health_colour(int health, int health_max);

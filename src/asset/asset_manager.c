@@ -13,12 +13,13 @@ SDL_Texture *load_texture(char *source, SDL_Palette* palette)
 void load_default_images(AssetImages *images)
 {
     images->logo = load_texture("../res/images/pokemon.png", NULL);
-    images->font = load_texture("../res/images/font-v3-4.png", NULL);
+    images->font = load_texture("../res/images/font-v3-5.png", NULL);
     images->front[0] = load_texture("../res/images/espeon-front.png", NULL);
     images->front[1] = load_texture("../res/images/umbreon-front.png", NULL);
     images->back[0] = load_texture("../res/images/espeon-back.png", NULL);
     images->back[1] = load_texture("../res/images/umbreon-back.png", NULL);
     images->player_status = load_texture("../res/images/player_status.png", NULL);
+    images->enemy_status = load_texture("../res/images/enemy_status.png", NULL);
 }
 
 AssetManager *init_asset_manager()
