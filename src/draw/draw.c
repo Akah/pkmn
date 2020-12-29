@@ -34,12 +34,12 @@ void draw_char(char ch, int x, int y)
     SDL_Rect dst_rect = {x, y, 8 * SCALE, 8 * SCALE};
     SDL_Rect src_rect = {row * 8, col * 8, 8, 8};
 
-    SDL_RenderCopy(
-	renderer,
-	asset_manager->images->font,
-	&src_rect,
-	&dst_rect
-    );
+    /* SDL_RenderCopy( */
+    /* 	renderer, */
+    /* 	asset_manager->images->font, */
+    /* 	&src_rect, */
+    /* 	&dst_rect */
+    /* ); */
 }
 
 void draw_string(char *str, int x, int y)
@@ -172,7 +172,7 @@ void draw_player_status()
     int health_val = ceil((health/health_max)*144);
     int exp_val = -(192*(exp/exp_nxt_lvl));
     
-    draw_image(asset_manager->images->player_status, 180, 158);
+    //draw_image(asset_manager->images->player_status, 180, 158);
 
     SDL_Colour health_colour = get_health_colour(health, health_max);
     
@@ -190,7 +190,7 @@ void draw_player_status()
 void draw_enemy_status()
 {
     draw_string("UMBREON", 2, 0);
-    draw_image(asset_manager->images->enemy_status, 8, 32);
+    //draw_image(asset_manager->images->enemy_status, 8, 32);
 }
 
 SDL_Colour get_health_colour(int health, int health_max)
@@ -215,17 +215,17 @@ SDL_Colour get_health_colour(int health, int health_max)
 
 void render()
 {
-    SDL_RenderClear(renderer);
+    /* SDL_RenderClear(renderer); */
 
-    // draw_start_screen(renderer, asset_manager);
-    // draw_start_menu();
+    /* // draw_start_screen(renderer, asset_manager); */
+    /* // draw_start_menu(); */
 
-    draw_image(asset_manager->images->back[0], 0, 112);
-    draw_image(asset_manager->images->front[1], 250, 0);
+    /* draw_image(asset_manager->images->back[0], 0, 112); */
+    /* draw_image(asset_manager->images->front[1], 250, 0); */
 
-    draw_player_status();
-    draw_enemy_status();
+    /* draw_player_status(); */
+    /* draw_enemy_status(); */
     
-    SDL_RenderPresent(renderer);
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    /* SDL_RenderPresent(renderer); */
+    /* SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); */
 }

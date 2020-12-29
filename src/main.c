@@ -1,11 +1,14 @@
 #include "main.h"
+#include "utils/resources.h"
 #include <string.h>
 #include <time.h>
 
 SDL_Window *window;
 SDL_Renderer *renderer;
-AssetManager *asset_manager;
+// tree_node *asset_manager;
 State *state;
+
+Resource *test;
 
 int main()
 {
@@ -13,13 +16,27 @@ int main()
     window = createWindow();
     printf("after window");
     renderer = SDL_CreateRenderer(window, -1 ,SDL_RENDERER_ACCELERATED);
-    asset_manager = init_asset_manager(renderer);
+    //asset_manager = init_asset_manager(renderer);
     state = initState();
-    
-    main_loop();
 
-    SDL_DestroyWindow(window);
-    SDL_DestroyRenderer(renderer);
+    /* SDL_DestroyWindow(window); */
+    /* SDL_DestroyRenderer(renderer); */
+
+
+    test = (Resource *)malloc(sizeof(Resource));
+
+    struct texture_array *array = malloc(sizeof(struct texture_array));
+    SDL_Texture *txt[4];
+    array->len = 4;
+    array->texture = txt;
+    
+
+    test->key = "test";
+    test->texture = array;
+    test->texture->texture[0] = load_texture("../res/images/pokemon.png", NULL);
+
+
+    main_loop();
     
     return 0;
 }
@@ -63,8 +80,19 @@ void main_loop()
 	render_timer -= delta_time;
 
 	if (render_timer <= 0) {
-	    render(renderer, asset_manager);
+	    // render(renderer, asset_manager);
+	    SDL_RenderClear(renderer);
+
+	    int w, h;
+	    int x = 0, y = 0;
+	    int n = 0;
+	    SDL_QueryTexture(test->texture->texture[n], NULL, NULL, &w, &h);
+	    SDL_Rect dst_rect = { x, y, w, h };
+	    SDL_RenderCopy(renderer, test->texture->texture[n], NULL, &dst_rect);
 	    render_timer = delta_time;
+
+	    SDL_RenderPresent(renderer);
+	    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 	}
 
 	fps_frames++;

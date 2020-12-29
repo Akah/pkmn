@@ -1,6 +1,6 @@
 #include "common.h"
 
-SDL_Texture *load_texture(char *path);
+SDL_Texture *load_texture(char *path, SDL_Palette *palette);
 
 void load_default_images(AssetImages *pImages);
 

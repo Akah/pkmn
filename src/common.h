@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+//#include "utils/tree.h"
 #include "state.h"
 #include "asset/assets.h"
 #include "time/date_time.h"
@@ -16,5 +17,5 @@ extern int* pQuit;
 
 extern SDL_Window *window;
 extern SDL_Renderer *renderer;
-extern AssetManager *asset_manager;
+//extern tree_node *asset_manager;
 extern State *state;

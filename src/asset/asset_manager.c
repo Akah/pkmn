@@ -24,11 +24,14 @@ void load_default_images(AssetImages *images)
 
 AssetManager *init_asset_manager()
 {
-    AssetManager *asset_manager = malloc(sizeof(AssetManager));
-    asset_manager->images = malloc(sizeof(AssetImages));
-    asset_manager->sounds = malloc(sizeof(AssetSounds));
 
-    load_default_images(asset_manager->images);
+    //tree_node *asset_manager = NULL;
     
-    return asset_manager;
+    // AssetManager *asset_manager = malloc(sizeof(AssetManager));
+    // asset_manager->images = malloc(sizeof(AssetImages));
+    // asset_manager->sounds = malloc(sizeof(AssetSounds));
+
+    // load_default_images(asset_manager->images);
+    
+    // return asset_manager;
 }
