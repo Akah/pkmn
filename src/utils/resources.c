@@ -1,4 +1,4 @@
-#include "common.h"
+#include "resources.h"
 
 /*
  * Three possible 'types':

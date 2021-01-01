@@ -17,5 +17,5 @@ extern int* pQuit;
 
 extern SDL_Window *window;
 extern SDL_Renderer *renderer;
-//extern tree_node *asset_manager;
+extern AssetManager *asset_manager;
 extern State *state;

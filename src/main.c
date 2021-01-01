@@ -5,10 +5,8 @@
 
 SDL_Window *window;
 SDL_Renderer *renderer;
-// tree_node *asset_manager;
+AssetManager *asset_manager;
 State *state;
-
-Resource *test;
 
 int main()
 {
@@ -23,17 +21,15 @@ int main()
     /* SDL_DestroyRenderer(renderer); */
 
 
-    test = (Resource *)malloc(sizeof(Resource));
-
     struct texture_array *array = malloc(sizeof(struct texture_array));
     SDL_Texture *txt[4];
+    
     array->len = 4;
     array->texture = txt;
-    
 
-    test->key = "test";
-    test->texture = array;
-    test->texture->texture[0] = load_texture("../res/images/pokemon.png", NULL);
+    asset_manager->images->key = "test";
+    asset_manager->images->texture = array;
+    asset_manager->images->texture[0] = load_texture("../res/images/pokemon.png");
 
 
     main_loop();
@@ -86,9 +82,9 @@ void main_loop()
 	    int w, h;
 	    int x = 0, y = 0;
 	    int n = 0;
-	    SDL_QueryTexture(test->texture->texture[n], NULL, NULL, &w, &h);
+	    SDL_QueryTexture(asset_manager->texture->texture[n], NULL, NULL, &w, &h);
 	    SDL_Rect dst_rect = { x, y, w, h };
-	    SDL_RenderCopy(renderer, test->texture->texture[n], NULL, &dst_rect);
+	    SDL_RenderCopy(renderer, asset_manager->texture->texture[n], NULL, &dst_rect);
 	    render_timer = delta_time;
 
 	    SDL_RenderPresent(renderer);

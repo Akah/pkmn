@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include "../state.h"
+#include "../utils/resources.h"
 
 #ifndef ASSETS_H
 #define ASSETS_H
@@ -22,7 +23,7 @@ typedef struct {
 } AssetSounds;
 
 typedef struct {
-    AssetImages *images;
+    Resource *images;
     AssetSounds *sounds;
 } AssetManager;
 

@@ -1,9 +1,10 @@
-#include "common.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 struct texture_array {
     int len;
     SDL_Texture **texture;
-} texture_array;
+};
 
 struct node {
     char *key;
