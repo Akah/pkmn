@@ -1,18 +1,27 @@
-#include "main.h"
-#include "utils/resources.h"
+#include <stdio.h>
 #include <string.h>
 #include <time.h>
+
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+
+#include "main.h"
+#include "utils/resources.h"
+#include "init/init.h"
+#include "draw/draw.h"
+#include "input/input.h"
+#include "utils/resources.h"
 
 SDL_Window *window;
 SDL_Renderer *renderer;
 AssetManager *asset_manager;
 State *state;
 
+Tree *res;
+
 int main()
 {
-    printf("before window");
     window = createWindow();
-    printf("after window");
     renderer = SDL_CreateRenderer(window, -1 ,SDL_RENDERER_ACCELERATED);
     //asset_manager = init_asset_manager(renderer);
     state = initState();
@@ -21,18 +30,24 @@ int main()
     /* SDL_DestroyRenderer(renderer); */
 
 
-    struct texture_array *array = malloc(sizeof(struct texture_array));
-    SDL_Texture *txt[4];
+    /* struct texture_array *array = malloc(sizeof(struct texture_array)); */
+    /* SDL_Texture *txt[4]; */
     
-    array->len = 4;
-    array->texture = txt;
+    /* array->len = 4; */
+    /* array->texture = txt; */
 
-    asset_manager->images->key = "test";
-    asset_manager->images->texture = array;
-    asset_manager->images->texture[0] = load_texture("../res/images/pokemon.png");
+    res = create_resource("../res/images/espeon-front.png", "espeon", NULL, 1);
 
+    printf("%s\n", res->key);
+    printf("%d\n", res->textures->len);
+    
+    int w = 0, h = 0;
+    SDL_QueryTexture(res->textures->texture[1], NULL, NULL, &w, &h);
 
-    main_loop();
+    printf("%d, %d\n", w, h);
+	    
+
+    //main_loop();
     
     return 0;
 }
@@ -82,9 +97,9 @@ void main_loop()
 	    int w, h;
 	    int x = 0, y = 0;
 	    int n = 0;
-	    SDL_QueryTexture(asset_manager->texture->texture[n], NULL, NULL, &w, &h);
+	    SDL_QueryTexture(res->textures->texture[0], NULL, NULL, &w, &h);
 	    SDL_Rect dst_rect = { x, y, w, h };
-	    SDL_RenderCopy(renderer, asset_manager->texture->texture[n], NULL, &dst_rect);
+	    SDL_RenderCopy(renderer, res->textures->texture[0], NULL, &dst_rect);
 	    render_timer = delta_time;
 
 	    SDL_RenderPresent(renderer);

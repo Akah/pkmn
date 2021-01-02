@@ -25,7 +25,7 @@ void load_default_images(AssetImages *images)
 AssetManager *init_asset_manager()
 {
     AssetManager *asset_manager = malloc(sizeof(AssetManager));
-    asset_manager->images = (Resource *)malloc(sizeof(Resource));
+    asset_manager->images = (struct node *)malloc(sizeof(struct node));
 
     //tree_node *asset_manager = NULL;
     

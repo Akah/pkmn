@@ -102,7 +102,8 @@ PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
 am_pkmn_OBJECTS = main.$(OBJEXT) draw/draw.$(OBJEXT) \
 	init/init.$(OBJEXT) input/input.$(OBJEXT) state.$(OBJEXT) \
-	asset/asset_manager.$(OBJEXT) time/date_time.$(OBJEXT)
+	asset/asset_manager.$(OBJEXT) time/date_time.$(OBJEXT) \
+	utils/resources.$(OBJEXT)
 pkmn_OBJECTS = $(am_pkmn_OBJECTS)
 pkmn_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -123,7 +124,7 @@ am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/main.Po ./$(DEPDIR)/state.Po \
 	asset/$(DEPDIR)/asset_manager.Po draw/$(DEPDIR)/draw.Po \
 	init/$(DEPDIR)/init.Po input/$(DEPDIR)/input.Po \
-	time/$(DEPDIR)/date_time.Po
+	time/$(DEPDIR)/date_time.Po utils/$(DEPDIR)/resources.Po
 am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -269,7 +270,9 @@ pkmn_SOURCES = \
 	state.c state.h \
 	asset/asset_manager.c asset/asset_manager.h \
 	asset/assets.h \
-	time/date_time.c time/date_time.h
+	time/date_time.c time/date_time.h \
+	utils/resources.c utils/resources.h \
+	common.h
 
 all: all-am
 
@@ -386,6 +389,14 @@ time/$(DEPDIR)/$(am__dirstamp):
 	@: > time/$(DEPDIR)/$(am__dirstamp)
 time/date_time.$(OBJEXT): time/$(am__dirstamp) \
 	time/$(DEPDIR)/$(am__dirstamp)
+utils/$(am__dirstamp):
+	@$(MKDIR_P) utils
+	@: > utils/$(am__dirstamp)
+utils/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) utils/$(DEPDIR)
+	@: > utils/$(DEPDIR)/$(am__dirstamp)
+utils/resources.$(OBJEXT): utils/$(am__dirstamp) \
+	utils/$(DEPDIR)/$(am__dirstamp)
 
 pkmn$(EXEEXT): $(pkmn_OBJECTS) $(pkmn_DEPENDENCIES) $(EXTRA_pkmn_DEPENDENCIES) 
 	@rm -f pkmn$(EXEEXT)
@@ -398,6 +409,7 @@ mostlyclean-compile:
 	-rm -f init/*.$(OBJEXT)
 	-rm -f input/*.$(OBJEXT)
 	-rm -f time/*.$(OBJEXT)
+	-rm -f utils/*.$(OBJEXT)
 
 distclean-compile:
 	-rm -f *.tab.c
@@ -409,6 +421,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@init/$(DEPDIR)/init.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@input/$(DEPDIR)/input.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@time/$(DEPDIR)/date_time.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@utils/$(DEPDIR)/resources.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -560,6 +573,8 @@ distclean-generic:
 	-rm -f input/$(am__dirstamp)
 	-rm -f time/$(DEPDIR)/$(am__dirstamp)
 	-rm -f time/$(am__dirstamp)
+	-rm -f utils/$(DEPDIR)/$(am__dirstamp)
+	-rm -f utils/$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -576,6 +591,7 @@ distclean: distclean-am
 	-rm -f init/$(DEPDIR)/init.Po
 	-rm -f input/$(DEPDIR)/input.Po
 	-rm -f time/$(DEPDIR)/date_time.Po
+	-rm -f utils/$(DEPDIR)/resources.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -628,6 +644,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f init/$(DEPDIR)/init.Po
 	-rm -f input/$(DEPDIR)/input.Po
 	-rm -f time/$(DEPDIR)/date_time.Po
+	-rm -f utils/$(DEPDIR)/resources.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -663,7 +680,6 @@ uninstall-am: uninstall-binPROGRAMS
 
 .PRECIOUS: Makefile
 
-	common.h
 
 clean-local:
 	@rm Makefile Makefile.in

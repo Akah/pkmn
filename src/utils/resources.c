@@ -1,4 +1,7 @@
+#include <SDL2/SDL_image.h>
+
 #include "resources.h"
+#include "../asset/asset_manager.h"
 
 /*
  * Three possible 'types':
@@ -10,24 +13,29 @@
  *
  */
 
-/* struct node { */
-/*     char *key; */
-/*     SDL_Texture *texture; // (value) */
-/*     struct node *left, *right; */
-/* }; */
-/* typedef Resource node; */
-
-void load_resource(Resource **tree, char *key, char *source, SDL_Palette *palette)
+Tree* create_resource(char* source, char* key, SDL_Palette* palette, int length)
 {
-    SDL_Surface *surface = IMG_Load(source);
-    if (surface == NULL) printf("SDL_Error: %s\n", IMG_GetError());
-    if (palette != NULL) surface->format->palette = palette;
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_FreeSurface(surface);
+    // init texture array
+    Texture_array* texture_array = malloc(sizeof(Texture_array));
+    SDL_Texture* texture = load_texture(source, palette);
+    
+    texture_array->len = length;
+    texture_array->texture[1] = texture;
 
-    node *temp = NULL;
-    if (!(*tree)) {
-	printf("creating new tree\n");
-	temp = (node *)malloc(sizeof(node));
-    }
+    int w = 0, h = 0;
+    SDL_QueryTexture(texture, NULL, NULL, &w, &h);
+    printf("%d, %d\n", w, h);
+    
+    // init tree node
+    Tree *resource = malloc(sizeof(Tree));
+    resource->key      = key;
+    resource->textures = texture_array;
+    resource->left     = NULL;
+    resource->right    = NULL;
+    return resource;
+}
+
+void print_resource(struct node* resource)
+{
+    return;
 }

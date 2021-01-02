@@ -23,7 +23,7 @@ typedef struct {
 } AssetSounds;
 
 typedef struct {
-    Resource *images;
+    struct node *images;
     AssetSounds *sounds;
 } AssetManager;
 
