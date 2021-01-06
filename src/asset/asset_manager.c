@@ -20,12 +20,16 @@ void load_default_images(AssetImages *images)
     images->back[1] = load_texture("../res/images/umbreon-back.png", NULL);
     images->player_status = load_texture("../res/images/player_status.png", NULL);
     images->enemy_status = load_texture("../res/images/enemy_status.png", NULL);
+    //
+    //resource_insert(&res, "../res/images/pokemon.png", "logo", NULL, 1);
+    //resource_insert(&res, "../res/images/font-v3-5.png", "font", NULL, 1);
 }
 
 AssetManager *init_asset_manager()
 {
-    AssetManager *asset_manager = malloc(sizeof(AssetManager));
-    asset_manager->images = (struct node *)malloc(sizeof(struct node));
+    //AssetManager *asset_manager = malloc(sizeof(AssetManager));
+    //asset_manager->images = (struct node *)malloc(sizeof(struct node));
+    // assets
 
     //tree_node *asset_manager = NULL;
     
@@ -35,5 +39,6 @@ AssetManager *init_asset_manager()
 
     // load_default_images(asset_manager->images);
     
-    return asset_manager;
+    //return asset_manager;
+  return NULL;
 }

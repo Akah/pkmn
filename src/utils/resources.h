@@ -4,9 +4,10 @@
 #include <SDL2/SDL.h>
 
 // instead of fixed size array; list/tree would be required to store values
+// ^ possible TODO
 struct texture_array {
     int len;
-    SDL_Texture* texture[64];
+    SDL_Texture* texture[6]; // max number of animation frames?
     
 };
 typedef struct texture_array Texture_array;
@@ -16,12 +17,21 @@ struct node {
     struct texture_array *textures;
     struct node *left, *right;
 };
+typedef struct node Node;
 typedef struct node Tree;
 
 // void load_resource(Resource **tree, char *key, char *source, SDL_Palette *palette);
 
-Tree* create_resource(char* source, char* key, SDL_Palette* palette, int length);
+Tree* resource_create(char* source, char* key, SDL_Palette* palette, int length);
 
-void print_resource(struct node* resource);
+Tree* resource_search(Tree** tree, char* key);
+
+void resource_insert(Tree** tree, Node* node);
+
+void resource_delete(Node* node);
+
+void resource_print(Node* resource);
+
+void print_helper(Node* node, int space);
 
 #endif

@@ -26,29 +26,22 @@ int main()
     //asset_manager = init_asset_manager(renderer);
     state = initState();
 
-    /* SDL_DestroyWindow(window); */
-    /* SDL_DestroyRenderer(renderer); */
+    res = resource_create("../res/images/espeon-front.png", "espeon", NULL, 1);
 
+    Node* temp = resource_create("../res/images/umbreon-front.png", "umbreon", NULL, 1);
+    resource_insert(&res, resource_create("../res/images/umbreon-front.png", "umbreon", NULL, 1));
+    resource_insert(&res, resource_create("../res/images/umbreon-front.png", "c", NULL, 1));
+    resource_insert(&res, resource_create("../res/images/umbreon-front.png", "b", NULL, 1));
+    resource_insert(&res, resource_create("../res/images/umbreon-front.png", "d", NULL, 1));
+    resource_insert(&res, resource_create("../res/images/umbreon-front.png", "a", NULL, 1));
 
-    /* struct texture_array *array = malloc(sizeof(struct texture_array)); */
-    /* SDL_Texture *txt[4]; */
+    resource_print(res);
     
-    /* array->len = 4; */
-    /* array->texture = txt; */
-
-    res = create_resource("../res/images/espeon-front.png", "espeon", NULL, 1);
-
-    printf("%s\n", res->key);
-    printf("%d\n", res->textures->len);
+    main_loop();
     
-    int w = 0, h = 0;
-    SDL_QueryTexture(res->textures->texture[1], NULL, NULL, &w, &h);
+    SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(renderer);
 
-    printf("%d, %d\n", w, h);
-	    
-
-    //main_loop();
-    
     return 0;
 }
 
@@ -94,12 +87,14 @@ void main_loop()
 	    // render(renderer, asset_manager);
 	    SDL_RenderClear(renderer);
 
+	    SDL_Texture *texture = resource_search(&res, "espeon")->textures->texture[1];
+
 	    int w, h;
 	    int x = 0, y = 0;
 	    int n = 0;
-	    SDL_QueryTexture(res->textures->texture[0], NULL, NULL, &w, &h);
+	    SDL_QueryTexture(texture, NULL, NULL, &w, &h);
 	    SDL_Rect dst_rect = { x, y, w, h };
-	    SDL_RenderCopy(renderer, res->textures->texture[0], NULL, &dst_rect);
+	    SDL_RenderCopy(renderer, texture, NULL, &dst_rect);
 	    render_timer = delta_time;
 
 	    SDL_RenderPresent(renderer);
