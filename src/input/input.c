@@ -1,4 +1,5 @@
 #include "input.h"
+#include "../utils.h"
 
 int quit = 0;
 
@@ -58,20 +59,20 @@ void handle_input_key()
     }
 
     if (key_state[SDL_SCANCODE_RIGHT]) {
-	SDL_LogDebug(SDL_LOG_CATEGORY_TEST, "right pressed");
+        _utils_debug("pressed right");
     }
 
     if (key_state[SDL_SCANCODE_LEFT]) {
-	SDL_LogDebug(SDL_LOG_CATEGORY_TEST, "left  pressed");
+	_utils_debug("pressed left");
     }
 
     if (key_state[SDL_SCANCODE_DOWN]) {
-	SDL_LogDebug(SDL_LOG_CATEGORY_TEST, "down  pressed");
+        _utils_debug("pressed down");
 	state->cursor.pos_y += 16 * SCALE;
     }
     
     if (key_state[SDL_SCANCODE_UP]) {
-	SDL_LogDebug(SDL_LOG_CATEGORY_TEST, "up    pressed");
+	_utils_debug("presed up");
 	state->cursor.pos_y -= 16 * SCALE;
     }
 }
