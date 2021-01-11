@@ -1,6 +1,13 @@
-#include "main.h"
 #include <string.h>
+#include <math.h>
 #include <time.h>
+
+#include "init/init.h"
+#include "draw/draw.h"
+#include "input/input.h"
+#include "asset/asset_manager.h"
+#include "time/date_time.h"
+#include "main.h"
 
 SDL_Window *window;
 SDL_Renderer *renderer;
