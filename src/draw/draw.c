@@ -218,13 +218,13 @@ void render()
     SDL_RenderClear(renderer);
 
     // draw_start_screen(renderer, asset_manager);
-    // draw_start_menu();
+    draw_start_menu();
 
-    draw_image(asset_manager->images->back[0], 0, 112);
-    draw_image(asset_manager->images->front[1], 250, 0);
+    // draw_image(asset_manager->images->back[0], 0, 112);
+    // draw_image(asset_manager->images->front[1], 250, 0);
 
-    draw_player_status();
-    draw_enemy_status();
+    // draw_player_status();
+    // draw_enemy_status();
     
     SDL_RenderPresent(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
