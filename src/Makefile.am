@@ -5,6 +5,7 @@ AM_LIBS = $(DEPS_LIBS)
 AM_LDFLAGS = -lSDL2 -lSDL2_image -lm
 
 pkmn_SOURCES = \
+	../res \
 	main.c main.h \
 	utils.c utils.h \
 	draw/draw.c draw/draw.h \
@@ -13,7 +14,7 @@ pkmn_SOURCES = \
 	state.c state.h \
 	asset/asset_manager.c asset/asset_manager.h \
 	asset/assets.h \
-	time/date_time.c time/date_time.h
+	time/date_time.c time/date_time.h \
 	common.h
 
 clean-local:
