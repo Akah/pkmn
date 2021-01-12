@@ -48,11 +48,13 @@ void main_loop()
     while (!quit) {
 	const int start_ticks = SDL_GetTicks();
 
+	// every second: 
 	if (SDL_GetTicks() > time_ticks + 1000) {
 	    t = time(NULL);
 	    tm = localtime(&t);
-	    sprintf(state->time.time, "%d:%d", tm->tm_hour, tm->tm_min);
-	    get_day(tm->tm_wday, state->time.day);
+	    sprintf(state->time->time, "%02d:%02d", tm->tm_hour, tm->tm_min);
+	    get_day(tm->tm_wday, state->time->day);
+	    get_time_of_day(tm->tm_hour, state->time->tod);
 	    time_ticks = SDL_GetTicks();
 	}
 	

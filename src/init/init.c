@@ -41,10 +41,10 @@ State *initState()
 	1,
     };
 
-    const Time time = {
-	"00:00",
-	"MON"
-    };
+    Time *time = malloc(sizeof(Time));
+    strcpy(time->time, "00:00");
+    strcpy(time->day, "MON");
+    strcpy(time->tod, "NIGHT");
     
     State *state = malloc(sizeof(State));
 
