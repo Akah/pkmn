@@ -1,0 +1,57 @@
+* GAME
+** DONE [#A] draw images on screen 
+** TODO [#B] draw text to screen via text input
+** TODO [#C] put drawn text into text boxes
+** TODO [#C] blit images onto main image (for battle effects via pixel modification)
+** TODO [#D] asset manager
+   struct with:
+     images
+      pokemon
+        32 max(?) mini images <- 6 for party, leaves possible 26 free for current area
+        x npc images 
+        map tileset
+      when in battle:
+        6 player back pokemon images
+        6 enemy front pokemon images 
+    sounds
+* CLEANUP
+** TODO seperate code into engine library and game itself
+
+MILESTONES:
+
+* Version 0 milestones:
+** TODO Start Menu 0.1
+*** TODO new game
+**** TODO intro
+**** TODO character design
+**** TODO name character
+**** TODO plop character into overworld (rest can be done later)
+*** TODO continue
+**** TODO serialise data to save file
+**** TODO deserialise data; load into game
+*** TODO settings
+** TODO Intro Screen 0.2
+** TODO Overworld 0.3
+*** TODO interactable tile map
+*** TODO controllable player character
+*** TODO interact with entities on map
+*** TODO independent NPCs
+** TODO One battle tournament 0.4
+*** TODO battles
+**** TODO enemy ai
+*** TODO tournament system
+
+
+* Version 1 milestones:
+** TODO multiplayer
+*** TODO networking
+*** TODO chat
+*** TODO pvp battle
+*** TODO trading: items; pokemon
+
+
+* Version n:
+** TODO kanto map; gyms; league
+** TODO johto map; gyms;
+** TODO hoenn map; gyms; league
+** TODO sinnoh map; gyms; league
