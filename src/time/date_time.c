@@ -5,25 +5,25 @@ void get_day(int day, char *str)
 {
     switch(day){
     case 0:
-	str = "SUN";
+	strcpy(str, "SUNDAY");
 	break;
     case 1:
-	str = "MON";
+	strcpy(str, "MONDAY");
 	break;
     case 2:
-	str = "TUE";
+	strcpy(str, "TUESDAY");
 	break;
     case 3:
-	str = "WED";
+	strcpy(str, "WEDNESDAY");
 	break;
     case 4:
-	str = "THU";
+	strcpy(str, "THURSDAY");
 	break;
     case 5:
-	str = "FRI";
+	strcpy(str,"FRIDAY");
 	break;
     default:
-	str = "SAT";
+	strcpy(str, "SATURDAY");
 	break;
     }
 }

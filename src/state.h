@@ -59,7 +59,7 @@ typedef struct {
 
 typedef struct {
     char time[7];
-    char day[5];
+    char day[10];
     char tod[8];
 } Time;
 
