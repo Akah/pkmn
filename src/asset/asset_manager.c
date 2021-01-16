@@ -13,7 +13,7 @@ SDL_Texture *load_texture(char *source, SDL_Palette* palette)
 void load_default_images(AssetImages *images)
 {
     images->logo = load_texture("../res/images/pokemon.png", NULL);
-    images->font = load_texture("../res/images/font-v3-5.png", NULL);
+    images->font = load_texture("../res/images/font-v3-6.png", NULL);
     images->front[0] = load_texture("../res/images/espeon-front.png", NULL);
     images->front[1] = load_texture("../res/images/umbreon-front.png", NULL);
     images->back[0] = load_texture("../res/images/espeon-back.png", NULL);
