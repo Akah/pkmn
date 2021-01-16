@@ -9,6 +9,8 @@
 #include "time/date_time.h"
 #include "main.h"
 
+#define TEXT_SPEED 4 // hight is slower
+
 SDL_Window *window;
 SDL_Renderer *renderer;
 AssetManager *asset_manager;
@@ -20,12 +22,12 @@ int main()
     renderer = SDL_CreateRenderer(window, -1 ,SDL_RENDERER_ACCELERATED);
     asset_manager = init_asset_manager(renderer);
     state = initState();
-    
+
     main_loop();
 
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
-    
+
     return 0;
 }
 
@@ -38,7 +40,7 @@ void main_loop()
     uint fps_current = 0;
     uint fps_frames = 0;
     int render_timer = roundf(1000.0f / 60.0f);
-    
+
     const int delta_time = roundf(1000.0f / 60.0f);
 
     time_t t;
@@ -48,7 +50,7 @@ void main_loop()
     while (!quit) {
 	const int start_ticks = SDL_GetTicks();
 
-	// every second: 
+	// every second:
 	if (SDL_GetTicks() > time_ticks + 1000) {
 	    t = time(NULL);
 	    tm = localtime(&t);
@@ -57,11 +59,12 @@ void main_loop()
 	    get_time_of_day(tm->tm_hour, state->time->tod);
 	    time_ticks = SDL_GetTicks();
 	}
-	
+
 	while (SDL_PollEvent(&event) !=0) {
 	    handle_input_event(event);
 	}
 
+	// input check every 300 ms
 	if (SDL_GetTicks() > (last_input_ticks + 300)) {
 	    handle_input_key(state);
 	    last_input_ticks = SDL_GetTicks();
@@ -69,13 +72,20 @@ void main_loop()
 
 	render_timer -= delta_time;
 
+	// draw/render
 	if (render_timer <= 0) {
 	    render(renderer, asset_manager);
 	    render_timer = delta_time;
 	}
 
+	if (state->dialog->writing_to_dialog) {
+	    if (fps_frames % TEXT_SPEED == 0) {
+		state->dialog->chars++;
+	    }
+	}
+
 	fps_frames++;
-	
+
 	if (fps_last < SDL_GetTicks() - 1000) {
 	    fps_last = SDL_GetTicks();
 	    fps_current = fps_frames;
@@ -92,5 +102,5 @@ void main_loop()
 	  SDL_Delay(delay);
 	}
     }
-   
+
 }

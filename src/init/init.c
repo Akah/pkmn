@@ -41,12 +41,16 @@ State *initState()
 	1,
     };
 
-    Time *time = malloc(sizeof(Time));
+    Time* time = malloc(sizeof(Time));
     strcpy(time->time, "00:00");
-    strcpy(time->day, "MON");
-    strcpy(time->tod, "NIGHT");
-    
-    State *state = malloc(sizeof(State));
+    strcpy(time->day,  "MONDAY");
+    strcpy(time->tod,  "NIGHT");
+
+    Dialog* dialog = malloc(sizeof(Dialog));
+    dialog->chars = 0;
+    dialog->writing_to_dialog = 0;
+
+    State* state = malloc(sizeof(State));
 
     state->current_state = START_MENU; // change later to into;
     state->overworld = overworld;
@@ -54,6 +58,7 @@ State *initState()
     state->cursor = cursor;
     state->test = 0;
     state->time = time;
+    state->dialog = dialog;
 
     return state;
 }

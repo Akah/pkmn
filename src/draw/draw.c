@@ -20,9 +20,9 @@ void draw_image(SDL_Texture *texture, int x, int y)
     int w, h;
 
     SDL_QueryTexture(texture, NULL, NULL, &w, &h);
-  
+
     SDL_Rect dst_rect = { x, y, px(w), px(h) };
-	
+
     SDL_RenderCopy(renderer, texture, NULL, &dst_rect);
 }
 
@@ -45,7 +45,11 @@ void draw_char(char ch, int x, int y)
 void draw_string(char *str, int x, int y)
 {
     int length = strlen(str);
-    for (int i=0; i < length; i++) {
+    int chars = state->dialog->chars;
+    if (length == chars) {
+	state->dialog->writing_to_dialog = 0;
+    }
+    for (int i=0; i < chars; i++) {
 	draw_char(str[i], px(x), px(y));
 	x = x+8;
     }
@@ -63,7 +67,7 @@ void draw_box(int x, int y, int w, int h)
     SDL_Colour colour = {255, 255, 255, 255};
     SDL_Rect rect = {x, y, w, h};
     draw_rect(rect, colour);
-    
+
     colour.r = 0;
     colour.g = 0;
     colour.b = 0;
@@ -82,28 +86,28 @@ void draw_box(int x, int y, int w, int h)
 
     rect = make_rect(x+p2, y, w-p4, p1);
     draw_rect(rect, colour);
-    
+
     rect = make_rect(x+(w-p2), y+p1, p1, p1);
     draw_rect(rect, colour);
-    
+
     rect = make_rect(x+(w-p1), y+p2, p1, h-p4);
     draw_rect(rect, colour);
-    
+
     rect = make_rect(x, y+p2, p1, h-16);
     draw_rect(rect, colour);
-    
+
     rect = make_rect(x+(w-p2), y+(h-p3), p1, p2);
     draw_rect(rect, colour);
-    
+
     rect = make_rect(x+p2, y+(h-p2), w-p4, p2);
     draw_rect(rect, colour);
-    
+
     rect = make_rect(x+p1, y+(h-p3), p1, p2);
     draw_rect(rect, colour);
 
     rect = make_rect(x, y+p2, p1, h-p4);
     draw_rect(rect, colour);
-    
+
     rect = make_rect(x+p1, y+p1, p1, p1);
     draw_rect(rect, colour);
 
@@ -120,10 +124,10 @@ void draw_box(int x, int y, int w, int h)
 
     rect = make_rect(x+p2, y+p3, p1, h-p7);//
     draw_rect(rect, colour);
-    
+
     rect = make_rect(x+(w-p3), y+p3, p1, h-p7);//
     draw_rect(rect, colour);
-    
+
     rect = make_rect(x+p3, y+(h-p4), w-p6, p1);//
     draw_rect(rect, colour);
 }
@@ -139,7 +143,7 @@ void draw_start_menu()
     draw_string("NEW GAME", 16, 16);
     draw_string("CONTINUE", 16, 32);
     draw_string("OPTIONS", 16, 48);
-    
+
     draw_char('~', 21, (state->start_menu.items*16*3) + 48);
 
     draw_dialog(0, px(120), SCREEN_WIDTH, SCREEN_HEIGHT - px(120));
@@ -153,7 +157,7 @@ void draw_start_screen()
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
     //draw_image(asset_manager->images->logo, 45, 20);
-    
+
     if ((SDL_GetTicks() / 1000) % 2) {
 	draw_string("Press any key", 55, 110);
     }
@@ -172,11 +176,11 @@ void draw_player_status()
 
     int health_val = ceil((health/health_max)*144);
     int exp_val = -(192*(exp/exp_nxt_lvl));
-    
+
     draw_image(asset_manager->images->player_status, 180, 158);
 
     SDL_Colour health_colour = get_health_colour(health, health_max);
-    
+
     SDL_Colour exp_colour = {0x20, 0x88, 0xf8};
     draw_rect(make_rect(252, 214, health_val, 6), health_colour);
     draw_rect(make_rect(396, 265, exp_val, 6), exp_colour);
@@ -214,19 +218,37 @@ SDL_Colour get_health_colour(int health, int health_max)
     return colour;
 }
 
+char* gender_question = "Are you a boy or a girl?";
+
+void ask_gender()
+{
+    state->dialog->writing_to_dialog = 1;
+    draw_dialog(0, px(120), SCREEN_WIDTH, SCREEN_HEIGHT - px(120));
+    draw_string(gender_question, 8, 128);
+
+    draw_dialog(
+	32,
+	24,
+	(SCREEN_WIDTH/2)-15,
+	(SCREEN_HEIGHT/2)-15
+	);
+}
+
 void render()
 {
     SDL_RenderClear(renderer);
 
     // draw_start_screen(renderer, asset_manager);
-    draw_start_menu();
+    //draw_start_menu();
+
+    ask_gender();
 
     // draw_image(asset_manager->images->back[0], 0, 112);
     // draw_image(asset_manager->images->front[1], 250, 0);
 
     // draw_player_status();
     // draw_enemy_status();
-    
+
     SDL_RenderPresent(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 }

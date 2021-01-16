@@ -1,5 +1,7 @@
 #include "../common.h"
 
+int px(int n);
+
 void render();
 
 void draw_rect(SDL_Rect rect, SDL_Colour colour);

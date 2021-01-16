@@ -64,12 +64,18 @@ typedef struct {
 } Time;
 
 typedef struct {
+    int chars;
+    int writing_to_dialog;
+} Dialog;
+
+typedef struct {
     enum states current_state;
     Overworld overworld;
     Start_menu start_menu;
     Cursor cursor;
-    int test;
+    Dialog *dialog;
     Time *time;
+    int test;
 } State;
 
 #endif
