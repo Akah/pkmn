@@ -1,10 +1,12 @@
+#include "../utils.h"
 #include "init.h"
 
 SDL_Window* createWindow()
 {
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	printf("SDL_Init error: %s\n", SDL_GetError());
-    }
+    else
+	_utils_debug("Initialised SDL");
 
     // SDL_WINDOW_RESIZABLE
     SDL_Window* window =
@@ -14,13 +16,15 @@ SDL_Window* createWindow()
 			 SCREEN_WIDTH,
 			 SCREEN_HEIGHT,
 			 SDL_WINDOW_SHOWN);
-    if (window == NULL) {
+    if (window == NULL)
 	printf("Window error: %s\n", SDL_GetError());
-    }
+    else
+	_utils_debug("Initialised window");
 
-    if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
+    if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
 	printf("SDL_image error: %s\n", IMG_GetError());
-    }
+    else
+	_utils_debug("Initialised SDL_image");
 
     return window;
 }
@@ -60,5 +64,6 @@ State *initState()
     state->time = time;
     state->dialog = dialog;
 
+    _utils_debug("Initialised state machine");
     return state;
 }

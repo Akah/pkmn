@@ -1,10 +1,17 @@
 #include "common.h"
+#include "../utils.h"
 
 SDL_Texture *load_texture(char *source, SDL_Palette* palette)
 {
     SDL_Surface *surface = IMG_Load(source);
-    if (surface == NULL) printf("SDL_Error: %s\n", IMG_GetError());
-    if (palette != NULL) surface->format->palette = palette;
+    char debug[1024];
+    if (surface == NULL)
+	sprintf(debug, "SDL_Error: %s", IMG_GetError());
+    else
+        sprintf(debug, "Loading file: %s", source);
+    _utils_debug(debug);
+    if (palette != NULL)
+	surface->format->palette = palette;
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_FreeSurface(surface);
     return texture;
@@ -29,6 +36,8 @@ AssetManager *init_asset_manager()
     asset_manager->sounds = malloc(sizeof(AssetSounds));
 
     load_default_images(asset_manager->images);
-    
+
+    _utils_debug("Initialised asset manager");
+
     return asset_manager;
 }
