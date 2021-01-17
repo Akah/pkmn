@@ -140,10 +140,13 @@ void draw_box(int x, int y, int w, int h)
     draw_rect(rect, colour);
 }
 
-void draw_dialog(char* str, int x, int y, int w, int h)
+void draw_dialog(char* str[18], int x, int y, int w, int h)
 {
     draw_box(x, y, w, h);
-    draw_string(str, x+8, y+40);
+    draw_string(str[0], x+8, y+40);
+    if (str[0+1] && (SDL_GetTicks() / 650) % 2) {
+	draw_char('~', w-52, SCREEN_HEIGHT-32);
+    }
 }
 
 void draw_start_menu()
@@ -229,7 +232,8 @@ SDL_Colour get_health_colour(int health, int health_max)
 
 // max line length is 18...
 char* gender_question[18] = {
-    "Are you a boy?_Or are you a girl?"
+    "Are you a boy?_Or are you a girl?",
+    "This is a second_part"
 };
 
 void ask_gender()
@@ -237,7 +241,7 @@ void ask_gender()
     state->dialog->writing_to_dialog = 1;
 
     draw_dialog(
-	gender_question[0],
+	gender_question,
 	0,
         SCREEN_HEIGHT - 160,
 	SCREEN_WIDTH,
