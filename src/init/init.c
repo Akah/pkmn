@@ -53,10 +53,12 @@ State *initState()
     Dialog* dialog = malloc(sizeof(Dialog));
     dialog->chars = 0;
     dialog->writing_to_dialog = 0;
+    dialog->open = 0;
+    dialog->buffer_position = 0;
 
     State* state = malloc(sizeof(State));
 
-    state->current_state = START_MENU; // change later to into;
+    state->current_state = NEW; // change later to into;
     state->overworld = overworld;
     state->start_menu = start_menu;
     state->cursor = cursor;

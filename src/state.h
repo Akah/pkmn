@@ -5,7 +5,8 @@ enum states {
     OVERWORLD,
     MENU,
     INTRO,
-    START_MENU
+    START_MENU,
+    NEW
 };
 
 enum start_menu_items {
@@ -66,6 +67,8 @@ typedef struct {
 typedef struct {
     int chars;
     int writing_to_dialog;
+    int buffer_position;
+    int open;
 } Dialog;
 
 typedef struct {

@@ -142,10 +142,11 @@ void draw_box(int x, int y, int w, int h)
 
 void draw_dialog(char* str[18], int x, int y, int w, int h)
 {
+    int buffer_pos = state->dialog->buffer_position;
     draw_box(x, y, w, h);
-    draw_string(str[0], x+8, y+40);
-    if (str[0+1] && (SDL_GetTicks() / 650) % 2) {
-	draw_char('~', w-52, SCREEN_HEIGHT-32);
+    draw_string(str[buffer_pos], x+8, y+40);
+    if (str[buffer_pos+1] && (SDL_GetTicks() / 300) % 2) {
+	draw_char('`', w-52, SCREEN_HEIGHT-35);
     }
 }
 
@@ -238,6 +239,7 @@ char* gender_question[18] = {
 
 void ask_gender()
 {
+    state->dialog->open = 1;
     state->dialog->writing_to_dialog = 1;
 
     draw_dialog(

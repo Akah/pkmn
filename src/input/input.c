@@ -50,12 +50,20 @@ void handle_input_key()
     const Uint8 *key_state = SDL_GetKeyboardState(NULL);
 
     switch (state->current_state) {
-        case START_MENU:
-	    handle_start_menu(key_state);
-	    break;
-        default:
-	    break;
+    case START_MENU:
+	handle_start_menu(key_state);
+	break;
+    case NEW:
+	if (state->dialog->open && !state->dialog->writing_to_dialog) {
+	    if (key_state[SDL_SCANCODE_RETURN]) {
+		state->dialog->buffer_position++;
+	    }
+	}
+	break;
+    default:
+	break;
     }
+
 
     if (key_state[SDL_SCANCODE_RIGHT]) {
         _utils_debug("pressed right");
