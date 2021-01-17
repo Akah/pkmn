@@ -1,4 +1,5 @@
 #include "draw.h"
+#include "../utils.h"
 
 /**
  * Scale screen position relative to screen scale value
@@ -46,12 +47,19 @@ void draw_string(char *str, int x, int y)
 {
     int length = strlen(str);
     int chars = state->dialog->chars;
+
     if (length == chars) {
 	state->dialog->writing_to_dialog = 0;
     }
+
     for (int i=0; i < chars; i++) {
-	draw_char(str[i], px(x), px(y));
-	x = x+8;
+	if (str[i] == '_') { // underscore used like \n
+	    x = 8;
+	    y += px(16);
+	    continue;
+	}
+	draw_char(str[i], px(x), y);
+	x += 8;
     }
 }
 
@@ -132,24 +140,25 @@ void draw_box(int x, int y, int w, int h)
     draw_rect(rect, colour);
 }
 
-void draw_dialog(int x, int y, int w, int h)
+void draw_dialog(char* str, int x, int y, int w, int h)
 {
     draw_box(x, y, w, h);
+    draw_string(str, x+8, y+40);
 }
 
 void draw_start_menu()
 {
-    draw_dialog(0, 0, px(120), px(70));
-    draw_string("NEW GAME", 16, 16);
-    draw_string("CONTINUE", 16, 32);
-    draw_string("OPTIONS", 16, 48);
+    /* draw_dialog(0, 0, px(120), px(70)); */
+    /* draw_string("NEW GAME", 16, 16); */
+    /* draw_string("CONTINUE", 16, 32); */
+    /* draw_string("OPTIONS", 16, 48); */
 
-    draw_char('~', 21, (state->start_menu.items*16*3) + 48);
+    /* draw_char('~', 21, (state->start_menu.items*16*3) + 48); */
 
-    draw_dialog(0, px(120), SCREEN_WIDTH, SCREEN_HEIGHT - px(120));
-    draw_string(state->time->day, 8, 128);
-    draw_string(state->time->tod, 8, 136);
-    draw_string(state->time->time, 72, 136);
+    /* draw_dialog(0, px(120), SCREEN_WIDTH, SCREEN_HEIGHT - px(120)); */
+    /* draw_string(state->time->day, 8, 128); */
+    /* draw_string(state->time->tod, 8, 136); */
+    /* draw_string(state->time->time, 72, 136); */
 }
 
 void draw_start_screen()
@@ -218,20 +227,21 @@ SDL_Colour get_health_colour(int health, int health_max)
     return colour;
 }
 
-char* gender_question = "Are you a boy or a girl?";
+// max line length is 18...
+char* gender_question[18] = {
+    "Are you a boy?_Or are you a girl?"
+};
 
 void ask_gender()
 {
     state->dialog->writing_to_dialog = 1;
-    draw_dialog(0, px(120), SCREEN_WIDTH, SCREEN_HEIGHT - px(120));
-    draw_string(gender_question, 8, 128);
 
     draw_dialog(
-	32,
-	24,
-	(SCREEN_WIDTH/2)-15,
-	(SCREEN_HEIGHT/2)-15
-	);
+	gender_question[0],
+	0,
+        SCREEN_HEIGHT - 160,
+	SCREEN_WIDTH,
+        160);
 }
 
 void render()
@@ -242,6 +252,7 @@ void render()
     //draw_start_menu();
 
     ask_gender();
+    // draw_string(gender_question[0], 0, 0);
 
     // draw_image(asset_manager->images->back[0], 0, 112);
     // draw_image(asset_manager->images->front[1], 250, 0);
