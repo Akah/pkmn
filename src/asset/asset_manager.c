@@ -1,7 +1,7 @@
-#include "common.h"
 #include "../utils.h"
+#include "asset_manager.h"
 
-SDL_Texture *load_texture(char *source, SDL_Palette* palette)
+SDL_Texture* load_texture(char *source, SDL_Palette* palette)
 {
     SDL_Surface *surface = IMG_Load(source);
     char debug[1024];

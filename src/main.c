@@ -16,7 +16,11 @@ SDL_Renderer *renderer;
 AssetManager *asset_manager;
 State *state;
 
-int main()
+#ifdef WINDOWS
+int WinMain(int argc, char *argv[])
+#else
+int main(int argc, char *argv[])
+#endif
 {
     window = createWindow();
     renderer = SDL_CreateRenderer(window, -1 ,SDL_RENDERER_ACCELERATED);
@@ -35,17 +39,17 @@ void main_loop()
 {
     char title[16];
     SDL_Event event;
-    uint last_input_ticks = 0;
-    uint fps_last = SDL_GetTicks();
-    uint fps_current = 0;
-    uint fps_frames = 0;
+    unsigned int last_input_ticks = 0;
+    unsigned int fps_last = SDL_GetTicks();
+    unsigned int fps_current = 0;
+    unsigned int fps_frames = 0;
     int render_timer = roundf(1000.0f / 60.0f);
 
     const int delta_time = roundf(1000.0f / 60.0f);
 
     time_t t;
     struct tm *tm;
-    uint time_ticks = 2000;
+    unsigned int time_ticks = 2000;
 
     while (!quit) {
 	const int start_ticks = SDL_GetTicks();
