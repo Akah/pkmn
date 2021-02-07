@@ -3,9 +3,8 @@ OS 	:= linux
 
 ifeq ($(OS),windows)
 	CC 	:= x86_64-w64-mingw32-gcc
-	WIN_INC := -I../include
-	WIN_LIB := -L../lib
-	LIBS 	:= -lSDL2 -lSDL2_image -lm -mwindows
+	INC	:= -I../include
+	LIBS 	:= -L../lib -lSDL2 -lSDL2_image -lm -mwindows
 	D 	:= -DWINDOWS
 	SUFFIX	:= .exe
 else
@@ -13,12 +12,13 @@ else
 	LIBS 	:= -lSDL2 -lSDL2_image -lm
 endif
 
-OBJS 	:= main.o \
+OBJS := main.o \
 	utils.o \
 	draw/draw.o \
 	init/init.o \
 	input/input.o \
 	state.o \
+	console.o \
 	asset/asset_manager.o \
 	time/date_time.o \
 
@@ -27,14 +27,14 @@ pkmn: $(OBJS)
 ifeq ($(OS),windows)
 	@echo Macros defined: $(D)
 endif
-	$(CC) $(D) -o $(TARGET)$(SUFFIX) $(OBJS) $(WIN_INC) $(WIN_LIB) $(LIBS)
+	$(CC) $(D) -o $(TARGET)$(SUFFIX) $(OBJS) $(INC) $(LIBS)
 	@echo Sucessfully built file: pkmn$(SUFFIX)
 
 %.o: %.c
-	$(CC) $(D) -c $< $(WIN_INC) $(WIN_LIB) $(LIBS) -o $@
+	$(CC) $(D) -c $< $(INC) $(LIBS) -o $@
 
 clean:
-	rm -f $(TARGET)
+	rm -f pkmn*
 	find . -name "*.o" -type f -delete
 
 rebuild: clean pkmn

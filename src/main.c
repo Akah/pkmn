@@ -1,20 +1,18 @@
-#include <string.h>
-#include <math.h>
-#include <time.h>
-
 #include "init/init.h"
 #include "draw/draw.h"
 #include "input/input.h"
 #include "asset/asset_manager.h"
 #include "time/date_time.h"
+#include "console.h"
+#include "utils.h"
 #include "main.h"
 
 #define TEXT_SPEED 4 // hight is slower
 
-SDL_Window *window;
-SDL_Renderer *renderer;
-AssetManager *asset_manager;
-State *state;
+SDL_Window      *window;
+SDL_Renderer    *renderer;
+AssetManager    *asset_manager;
+State           *state;
 
 #ifdef WINDOWS
 int WinMain(int argc, char *argv[])
@@ -27,6 +25,12 @@ int main(int argc, char *argv[])
     asset_manager = init_asset_manager(renderer);
     state = initState();
 
+    // int data = 101;
+    // SDL_Thread* threadID = SDL_CreateThread( threadFunction, "LazyThread", (void*)data );
+    // printf("this is after but should be shown before\n");
+    //Remove timer in case the call back was not called
+    // SDL_WaitThread( threadID, NULL );
+    SDL_CreateThread(read_console, "console_thread", (void*)NULL);
     main_loop();
 
     SDL_DestroyWindow(window);
