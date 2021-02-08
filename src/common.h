@@ -5,7 +5,6 @@
 #include <string.h>
 #include <math.h>
 #include <time.h>
-#include <assert.h>
 
 #include "state.h"
 #include "asset/assets.h"

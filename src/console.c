@@ -33,11 +33,15 @@ char** str_split(char* a_str, const char a_delim)
         char* token = strtok(a_str, delim);
 
         while (token) {
-            assert(idx < count);
+	    if (idx > count) {
+		return NULL;
+	    }
             *(result + idx++) = strdup(token);
             token = strtok(0, delim);
         }
-        assert(idx == count - 1);
+	if (idx != count -1) {
+	    return NULL;
+	}
         *(result + idx) = 0;
     }
 
@@ -52,16 +56,18 @@ int read_console()
 	printf("$ ");
 	fgets(input, 128, stdin);
 	//dirty fix to remove \n from end of last input
-	char** buffer = str_split(str_split(input, (char)10)[0], ' ');
+
+	char** split_lf = str_split(input, (char)10);
+	if (split_lf[0] == NULL) continue;
+
+	char** buffer = str_split(split_lf[0], ' ');
+	if (buffer == NULL) continue;
 
 	int i;
-        for (i = 0; *(buffer + i); i++)
-        {
+        for (i = 0; *(buffer + i); i++) {
             printf("[%d]%s\n", i, *(buffer + i));
             //free(*(buffer + i));
         }
-	// TODO: error handling for input
-	// TODO: default handling for input
 
 	char msg[40];
 	if (strcmp(buffer[0], "add") == 0) {

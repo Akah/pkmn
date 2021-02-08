@@ -254,10 +254,10 @@ void render()
 {
     SDL_RenderClear(renderer);
 
-    // draw_start_screen(renderer, asset_manager);
+    draw_start_screen();
     //draw_start_menu();
 
-    ask_gender();
+    // ask_gender();
     // draw_string(gender_question[0], 0, 0);
 
     // draw_image(asset_manager->images->back[0], 0, 112);
