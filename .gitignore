@@ -8,6 +8,9 @@ configs/
 *.cache
 configure
 
+lib/
+include/
+
 
 # emacs unsaved files
 *~
