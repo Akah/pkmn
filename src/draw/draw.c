@@ -45,25 +45,12 @@ void draw_char(char ch, int x, int y)
 
 void draw_string(char *str, int x, int y)
 {
-    int length = strlen(str);
-    int chars = state->dialog->chars;
-
-    if (length == chars) {
-	state->dialog->writing_to_dialog = 0;
-    }
-
-    for (int i=0; i < chars; i++) {
-	if (str[i] == '_') { // underscore used like \n
-	    x = 8;
-	    y += px(16);
-	    continue;
-	}
+    for (int i=0; i < (int)strlen(str); i++) {
 	draw_char(str[i], px(x), y);
 	x += 8;
     }
 }
 
-SDL_Rect make_rect(int x, int y, int w, int h);
 SDL_Rect make_rect(int x, int y, int w, int h)
 {
     SDL_Rect rect = {x, y, w, h};
@@ -169,10 +156,10 @@ void draw_start_screen()
 {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-    //draw_image(asset_manager->images->logo, 45, 20);
+    draw_image(asset_manager->images->logo, 20, 40);
 
     if ((SDL_GetTicks() / 1000) % 2) {
-	draw_string("Press any key", 55, 110);
+	draw_string("Press any key", 0, 0);
     }
 }
 
@@ -231,40 +218,11 @@ SDL_Colour get_health_colour(int health, int health_max)
     return colour;
 }
 
-// max line length is 18...
-char* gender_question[18] = {
-    "Are you a boy?_Or are you a girl?",
-    "This is a second_part"
-};
-
-void ask_gender()
-{
-    state->dialog->open = 1;
-    state->dialog->writing_to_dialog = 1;
-
-    draw_dialog(
-	gender_question,
-	0,
-        SCREEN_HEIGHT - 160,
-	SCREEN_WIDTH,
-        160);
-}
-
 void render()
 {
     SDL_RenderClear(renderer);
 
-    draw_start_screen();
-    //draw_start_menu();
-
-    // ask_gender();
-    // draw_string(gender_question[0], 0, 0);
-
-    // draw_image(asset_manager->images->back[0], 0, 112);
-    // draw_image(asset_manager->images->front[1], 250, 0);
-
-    // draw_player_status();
-    // draw_enemy_status();
+    draw_string("test", 0, 0);
 
     SDL_RenderPresent(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);

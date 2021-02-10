@@ -27,3 +27,5 @@ void draw_dialog(char* str[18], int x, int y, int w, int h);
 void draw_player_status();
 
 SDL_Colour get_health_colour(int health, int health_max);
+
+SDL_Rect make_rect(int x, int y, int w, int h);
