@@ -16,4 +16,4 @@ jobs:
     - name: install dependencies
       run: sudo apt install -y libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev
     - name: make
-      run: make
+      run: cd src && make
