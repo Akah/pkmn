@@ -51,8 +51,6 @@ State *initState()
     strcpy(time->tod,  "NIGHT");
 
     Dialog* dialog = malloc(sizeof(Dialog));
-    dialog->chars = 0;
-    dialog->writing_to_dialog = 0;
     dialog->open = 0;
     dialog->buffer_position = 0;
 

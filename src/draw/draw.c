@@ -127,13 +127,17 @@ void draw_box(int x, int y, int w, int h)
     draw_rect(rect, colour);
 }
 
-void draw_dialog(char* str[18], int x, int y, int w, int h)
+void draw_dialog(char **str, int x, int y, int w, int h)
 {
     int buffer_pos = state->dialog->buffer_position;
+    //state->dialog->open = 1;
     draw_box(x, y, w, h);
     draw_string(str[buffer_pos], x+8, y+40);
-    if (str[buffer_pos+1] && (SDL_GetTicks() / 300) % 2) {
-	draw_char('`', w-52, SCREEN_HEIGHT-35);
+    if (str[buffer_pos+1]) {
+	draw_string(str[buffer_pos+1], x+8, y+72);
+    }
+    if (str[buffer_pos+2] && (SDL_GetTicks() / 300) % 2) {
+    	draw_char('`', w-52, SCREEN_HEIGHT-35);
     }
 }
 
@@ -222,7 +226,15 @@ void render()
 {
     SDL_RenderClear(renderer);
 
-    draw_string("test", 0, 0);
+    char *a[18] = {
+    //  "------------------"< 18 chars max length
+	"This is a max exa-",
+	"ple although it ",
+	"looks like more",
+	"should fit."
+    };
+
+    draw_dialog(a, 0, px(116), SCREEN_WIDTH, SCREEN_HEIGHT - px(116));
 
     SDL_RenderPresent(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);

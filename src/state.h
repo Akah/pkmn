@@ -65,8 +65,6 @@ typedef struct {
 } Time;
 
 typedef struct {
-    int chars;
-    int writing_to_dialog;
     int buffer_position;
     int open;
 } Dialog;

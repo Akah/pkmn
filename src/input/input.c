@@ -54,10 +54,10 @@ void handle_input_key()
 	handle_start_menu(key_state);
 	break;
     case NEW:
-	if (state->dialog->open && !state->dialog->writing_to_dialog) {
-	    if (key_state[SDL_SCANCODE_RETURN]) {
-		state->dialog->buffer_position++;
-	    }
+	if (key_state[SDL_SCANCODE_RETURN]) {
+	    _utils_debug("enter pressed during dialog");
+
+	    state->dialog->buffer_position++;
 	}
 	break;
     default:

@@ -25,11 +25,6 @@ int main(int argc, char *argv[])
     asset_manager = init_asset_manager(renderer);
     state = initState();
 
-    // int data = 101;
-    // SDL_Thread* threadID = SDL_CreateThread( threadFunction, "LazyThread", (void*)data );
-    // printf("this is after but should be shown before\n");
-    //Remove timer in case the call back was not called
-    // SDL_WaitThread( threadID, NULL );
     SDL_CreateThread(read_console, "console_thread", (void*)NULL);
     main_loop();
 
@@ -54,6 +49,8 @@ void main_loop()
     time_t t;
     struct tm *tm;
     unsigned int time_ticks = 2000;
+
+    //_utils_debug("started main loop");
 
     while (!quit) {
 	const int start_ticks = SDL_GetTicks();
