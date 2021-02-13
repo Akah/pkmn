@@ -83,12 +83,6 @@ void main_loop()
 	    render_timer = delta_time;
 	}
 
-	if (state->dialog->writing_to_dialog) {
-	    if (fps_frames % TEXT_SPEED == 0) {
-		state->dialog->chars++;
-	    }
-	}
-
 	fps_frames++;
 
 	if (fps_last < SDL_GetTicks() - 1000) {
