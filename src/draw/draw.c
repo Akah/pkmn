@@ -130,9 +130,11 @@ void draw_box(int x, int y, int w, int h)
 void draw_dialog(char **str, int x, int y, int w, int h)
 {
     int buffer_pos = state->dialog->buffer_position;
-    //state->dialog->open = 1;
     draw_box(x, y, w, h);
     draw_string(str[buffer_pos], x+8, y+40);
+    if (str[buffer_pos] == NULL)
+	return;
+    //state->dialog->open = 1;
     if (str[buffer_pos+1]) {
 	draw_string(str[buffer_pos+1], x+8, y+72);
     }
