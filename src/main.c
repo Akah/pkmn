@@ -1,9 +1,10 @@
-#include "init/init.h"
-#include "draw/draw.h"
-#include "input/input.h"
 #include "asset/asset_manager.h"
-#include "time/date_time.h"
 #include "console.h"
+#include "draw/draw.h"
+#include "draw/render.h"
+#include "init/init.h"
+#include "input/input.h"
+#include "time/date_time.h"
 #include "utils.h"
 #include "main.h"
 
@@ -82,6 +83,7 @@ void main_loop()
 	    render(renderer, asset_manager);
 	    render_timer = delta_time;
 	}
+
 
 	fps_frames++;
 

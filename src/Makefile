@@ -15,6 +15,7 @@ endif
 OBJS := main.o \
 	utils.o \
 	draw/draw.o \
+	draw/render.o \
 	init/init.o \
 	input/input.o \
 	state.o \
