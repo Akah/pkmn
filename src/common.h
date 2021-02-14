@@ -9,10 +9,10 @@
 #include "state.h"
 #include "asset/assets.h"
 
-#define SCREEN_WIDTH  640
-#define SCREEN_HEIGHT 480
-#define SCREEN_TITLE  "title"
 #define SCALE         3
+#define SCREEN_WIDTH  160*SCALE
+#define SCREEN_HEIGHT 144*SCALE
+#define SCREEN_TITLE  "title"
 
 extern int quit;
 // extern SDL_mutex    *console_buffer;

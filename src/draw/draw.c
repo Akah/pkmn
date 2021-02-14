@@ -234,7 +234,9 @@ void render()
 	"should fit."
     };
 
-    draw_dialog(a, 0, px(116), SCREEN_WIDTH, SCREEN_HEIGHT - px(116));
+    int height = 100;
+
+    draw_dialog(a, 0, px(height), SCREEN_WIDTH, SCREEN_HEIGHT - px(height));
 
     SDL_RenderPresent(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
