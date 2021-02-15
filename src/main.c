@@ -21,6 +21,9 @@ int WinMain(int argc, char *argv[])
 int main(int argc, char *argv[])
 #endif
 {
+    (void) argc;
+    (void) argv;
+
     window = createWindow();
     renderer = SDL_CreateRenderer(window, -1 ,SDL_RENDERER_ACCELERATED);
     asset_manager = init_asset_manager(renderer);
