@@ -1,12 +1,12 @@
 #include "input.h"
 #include "../utils.h"
 
-int quit = 0;
+bool quit = false;
 
 void handle_input_event(SDL_Event event)
 {
     if (event.type == SDL_QUIT) {
-	quit = 1;
+	quit = true;
 	return;
     }
 }

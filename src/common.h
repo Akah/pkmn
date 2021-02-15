@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <string.h>
@@ -14,7 +15,7 @@
 #define SCREEN_HEIGHT 144*SCALE
 #define SCREEN_TITLE  "title"
 
-extern int quit;
+extern bool quit;
 // extern SDL_mutex    *console_buffer;
 
 extern SDL_Window   *window;
